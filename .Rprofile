@@ -8,5 +8,7 @@ options(
   )
 )
 
-options(pkgdown.internet = FALSE)
-options(pkgdown.use_curl = FALSE)
+options(
+  pkgdown.internet = FALSE,
+  pkgdown.use_curl = FALSE
+)

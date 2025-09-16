@@ -30,7 +30,7 @@ jobs:
 
       - name: Generate Coverage Report
         run: |
-          Rscript -e 'covr::codecov(quiet = FALSE, file = "validation/coverage.xml")'
+          Rscript -e 'covr::to_cobertura(covr::package_coverage(), file = "validation/coverage.xml")'
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v5

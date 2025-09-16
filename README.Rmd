@@ -16,12 +16,8 @@ knitr::opts_chunk$set(
 # bakerrr ⏲️
 
 <!-- badges: start -->
-
-[![R-CMD-check + Test Coverage](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yaml)
-
-
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/anirbanshaw24/bakerrr/graph/badge.svg)](https://app.codecov.io/gh/anirbanshaw24/bakerrr)
+[![codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
 Elegant S7-based parallel job orchestration for R

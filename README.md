@@ -6,8 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/anirbanshaw24/bakerrr/graph/badge.svg)](https://app.codecov.io/gh/anirbanshaw24/bakerrr)
+[![codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
 Elegant S7-based parallel job orchestration for R
