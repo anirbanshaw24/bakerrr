@@ -32,7 +32,7 @@ Elegant S7-based parallel job orchestration for R
  - Error Resilience: Built-in tryCatch error handling per job
  - Progress Monitoring: Console spinner with live status updates
  - Flexible Configuration: Customizable daemon count and cleanup options
- - Clean API: Intuitive print(), summary(), and run_jobs() methods
+ - Clean API: Intuitive print(), summary(), and run_jobs(wait_for_results) methods
 
 ## Installation
 
@@ -108,7 +108,7 @@ args_list <- list(
 )
 
 job <- bakerrr::bakerrr(risky_function, args_list) |>
-  bakerrr::run_jobs()
+  bakerrr::run_jobs(wait_for_results = FALSE)
 job@results
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
@@ -129,7 +129,7 @@ job <- bakerrr::bakerrr(
     supervise = TRUE
   )
 ) |>
-  bakerrr::run_jobs()
+  bakerrr::run_jobs(wait_for_results = FALSE)
 
 ```
 

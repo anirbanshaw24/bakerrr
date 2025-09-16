@@ -4,6 +4,10 @@
 # bakerrr ⏲️
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/anirbanshaw24/bakerrr/graph/badge.svg)](https://app.codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
 Elegant S7-based parallel job orchestration for R
@@ -21,7 +25,8 @@ and progress monitoring.
 - Error Resilience: Built-in tryCatch error handling per job
 - Progress Monitoring: Console spinner with live status updates
 - Flexible Configuration: Customizable daemon count and cleanup options
-- Clean API: Intuitive print(), summary(), and run_jobs() methods
+- Clean API: Intuitive print(), summary(), and
+  run_jobs(wait_for_results) methods
 
 ## Installation
 
@@ -80,16 +85,6 @@ job@results
 #> [[4]] [1] 15
 
 print(job)
-#> 
-#> ✅ bakerrr
-#> ├─ Status: COMPLETED
-#> ├─ Function: function (x, y)  {     Sys.sleep(1)     x + y }
-#> ├─ Args: 4 sets
-#> ├─ Daemons: 2
-#> ├─ Cleanup: enabled
-#> ├─ Process alive: FALSE
-#> ├─ Result:
-#> │  └─ List with 4 elements
 #> ✅ bakerrr
 #> ├─ Status: COMPLETED
 #> ├─ Function: compute_sum
@@ -119,16 +114,9 @@ args_list <- list(
 )
 
 job <- bakerrr::bakerrr(risky_function, args_list) |>
-  bakerrr::run_jobs()
+  bakerrr::run_jobs(wait_for_results = FALSE)
 job@results
-#> [[1]]
-#> [1] 10
-#> 
-#> [[2]]
-#> Error in purrr::in_parallel: Intentional error
-#> 
-#> [[3]]
-#> [1] 20
+#> [1] "sleeping"
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
 #> [[3]] [1] 20
@@ -147,7 +135,7 @@ job <- bakerrr::bakerrr(
     supervise = TRUE
   )
 ) |>
-  bakerrr::run_jobs()
+  bakerrr::run_jobs(wait_for_results = FALSE)
 ```
 
 ### Asynchronous Execution

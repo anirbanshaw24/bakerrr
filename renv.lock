@@ -1582,6 +1582,42 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "P3M"
     },
+    "hunspell": {
+      "Package": "hunspell",
+      "Version": "3.0.6",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "High-Performance Stemmer, Tokenizer, and Spell Checker",
+      "Depends": [
+        "R (>= 3.0.2)"
+      ],
+      "Encoding": "UTF-8",
+      "Authors@R": "c( person(\"Jeroen\", \"Ooms\", ,\"jeroenooms@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Authors of libhunspell\", role = \"cph\", comment = \"see AUTHORS file\"))",
+      "Description": "Low level spell checker and morphological analyzer based on the  famous 'hunspell' library <https://hunspell.github.io>. The package can analyze or check individual words as well as parse text, latex, html or xml documents. For a more user-friendly interface use the 'spelling' package which builds on this package to automate checking of files, documentation and vignettes in all common formats.",
+      "License": "GPL-2 | LGPL-2.1 | MPL-1.1",
+      "URL": "https://docs.ropensci.org/hunspell/ https://ropensci.r-universe.dev/hunspell",
+      "BugReports": "https://github.com/ropensci/hunspell/issues",
+      "Imports": [
+        "Rcpp",
+        "digest"
+      ],
+      "LinkingTo": [
+        "Rcpp (>= 0.12.12)"
+      ],
+      "Suggests": [
+        "spelling",
+        "testthat",
+        "knitr",
+        "rmarkdown"
+      ],
+      "VignetteBuilder": "knitr",
+      "RoxygenNote": "7.2.3",
+      "Language": "en-US",
+      "NeedsCompilation": "yes",
+      "Author": "Jeroen Ooms [aut, cre], Authors of libhunspell [cph] (see AUTHORS file)",
+      "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+      "Repository": "RSPM"
+    },
     "ini": {
       "Package": "ini",
       "Version": "0.3.1",
@@ -3212,6 +3248,33 @@
       "PkgrVersion": "v3.0.0-alpha.1",
       "PkgrInstallType": "binary",
       "PkgrRepositoryURL": "https://mpn.metworx.com/snapshots/stable/2023-05-14"
+    },
+    "spelling": {
+      "Package": "spelling",
+      "Version": "2.3.2",
+      "Source": "Repository",
+      "Title": "Tools for Spell Checking in R",
+      "Authors@R": "c( person(\"Jeroen\", \"Ooms\", , \"jeroenooms@gmail.com\", role = c(\"cre\", \"aut\"), comment = c(ORCID = \"0000-0002-4035-0289\")), person(\"Jim\", \"Hester\", , \"james.hester@rstudio.com\", role = \"aut\"))",
+      "Description": "Spell checking common document formats including latex, markdown, manual pages, and description files. Includes utilities to automate checking of documentation and  vignettes as a unit test during 'R CMD check'. Both British and American English are  supported out of the box and other languages can be added. In addition, packages may define a 'wordlist' to allow custom terminology without having to abuse punctuation.",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "URL": "https://ropensci.r-universe.dev/spelling https://docs.ropensci.org/spelling/",
+      "BugReports": "https://github.com/ropensci/spelling/issues",
+      "Imports": [
+        "commonmark",
+        "xml2",
+        "hunspell (>= 3.0)",
+        "knitr"
+      ],
+      "Suggests": [
+        "pdftools"
+      ],
+      "RoxygenNote": "7.3.1",
+      "Language": "en-GB",
+      "NeedsCompilation": "no",
+      "Author": "Jeroen Ooms [cre, aut] (ORCID: <https://orcid.org/0000-0002-4035-0289>), Jim Hester [aut]",
+      "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+      "Repository": "RSPM"
     },
     "stringi": {
       "Package": "stringi",
