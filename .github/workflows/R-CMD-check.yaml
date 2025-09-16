@@ -1,0 +1,55 @@
+name: R-CMD-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      matrix:
+        config:
+          - {os: ubuntu-latest, r: '4.3'}
+          - {os: macos-latest, r: '4.3'}
+          - {os: windows-latest, r: '4.3'}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev qpdf
+
+      - name: Install R package dependencies
+        run: |
+          install.packages('remotes')
+          remotes::install_deps(dependencies = TRUE)
+
+      - name: Install development packages
+        run: |
+          install.packages(c('devtools','roxygen2','pkgdown','lintr','testthat','covr'))
+
+      - name: Normalize file timestamps
+        run: |
+          find . -type f -exec touch {} +
+
+      - name: Check package
+        run: |
+          R CMD build .
+          R CMD check *.tar.gz --as-cran
+
+      - name: Run lintr
+        run: R -e "lintr::lint_package()"
+
+      - name: Run spell check
+        run: R -e "devtools::spell_check()"

@@ -7,6 +7,5 @@
   constants <- load_config()
   if (!is.null(constants)) {
     assign("pkg_constants", constants, envir = pkg_env)
-    packageStartupMessage("bakerrr constants loaded.")
   }
 }
