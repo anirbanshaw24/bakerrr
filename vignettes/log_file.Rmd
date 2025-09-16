@@ -2,7 +2,7 @@
 title: "Log to File"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Efficient Parallel Job Orchestration with bakerrr with}
+  %\VignetteIndexEntry{Log to File}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
