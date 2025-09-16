@@ -45,11 +45,3 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
-
-# verificaiton reports
-verification-summary.*
-# {shinytest2}: Ignore new debug snapshots for `$expect_values()`
-*_.new.png
-*_.new.json
-inst/doc
-docs
