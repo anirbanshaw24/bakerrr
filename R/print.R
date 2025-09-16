@@ -1,9 +1,12 @@
 
 #' Print method for bakerrr S7 job objects
 #'
-#' Displays a concise summary of the \code{bakerrr} job object, including current status,
-#' function name, number of argument sets, daemon count, cleanup setting, process status, and result summary.
-#' Outputs a status icon and key runtime information for quick inspection.
+#' Displays a concise summary of the \code{bakerrr} job object,
+#' including current status,
+#' function name, number of argument sets, daemon count,
+#' cleanup setting, process status, and result summary.
+#' Outputs a status icon and key runtime information for
+#' quick inspection.
 #'
 #' @name print
 #'
@@ -19,7 +22,9 @@ S7::method(print, bakerrr) <- function(x, ...) {
   status <- if (!is.null(x@bg_job_status)) {
     if (x@bg_job_status$is_alive()) "running"
     else "completed"
-  } else "created"
+  } else {
+    "created"
+  }
 
   print_constants <- get_print_constants()
 
@@ -33,15 +38,47 @@ S7::method(print, bakerrr) <- function(x, ...) {
   )
 
   cat(sprintf("\n%s bakerrr\n", status_icon))
-  cat(sprintf("%s Status: %s\n", print_constants$non_ascii_chars$horizontal_t, toupper(status)))
-  cat(sprintf("%s Function: %s\n", print_constants$non_ascii_chars$horizontal_t, if (!is.null(x@fun)) deparse1(x@fun)[1] else "<none>"))
+  cat(
+    sprintf(
+      "%s Status: %s\n",
+      print_constants$non_ascii_chars$horizontal_t,
+      toupper(status)
+    )
+  )
+  cat(
+    sprintf(
+      "%s Function: %s\n", print_constants$non_ascii_chars$horizontal_t,
+      if (!is.null(x@fun)) deparse1(x@fun)[1] else "<none>"
+    )
+  )
 
   args_len <- length(x@args_list)
-  cat(sprintf("%s Args: %d sets\n", print_constants$non_ascii_chars$horizontal_t, args_len))
-  cat(sprintf("%s Daemons: %d\n", print_constants$non_ascii_chars$horizontal_t, x@n_daemons))
-  cat(sprintf("%s Cleanup: %s\n", print_constants$non_ascii_chars$horizontal_t, ifelse(x@cleanup, "enabled", "disabled")))
+  cat(
+    sprintf(
+      "%s Args: %d sets\n", print_constants$non_ascii_chars$horizontal_t,
+      args_len
+    )
+  )
+  cat(
+    sprintf(
+      "%s Daemons: %d\n", print_constants$non_ascii_chars$horizontal_t,
+      x@n_daemons
+    )
+  )
+  cat(
+    sprintf(
+      "%s Cleanup: %s\n", print_constants$non_ascii_chars$horizontal_t,
+      ifelse(x@cleanup, "enabled", "disabled")
+    )
+  )
   if (!is.null(x@bg_job_status)) {
-    cat(sprintf("%s Process alive: %s\n", print_constants$non_ascii_chars$horizontal_t, x@bg_job_status$is_alive()))
+    cat(
+      sprintf(
+        "%s Process alive: %s\n",
+        print_constants$non_ascii_chars$horizontal_t,
+        x@bg_job_status$is_alive()
+      )
+    )
   }
 
   # Results summary

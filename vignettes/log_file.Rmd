@@ -34,7 +34,7 @@ process_data <- function(dataset_id, filter_col, threshold) {
   if (!is.numeric(threshold) || threshold <= 0) {
     stop("threshold must be positive numeric.")
   }
-  
+
   # Simulate loading data
   set.seed(as.integer(sub("DS_", "", dataset_id))) # Reproducible per job
   n <- sample(100:500, 1)
@@ -44,12 +44,12 @@ process_data <- function(dataset_id, filter_col, threshold) {
     value = round(rnorm(n, 50, 15)),
     rating = sample(1:10, n, replace = TRUE)
   )
-  
+
   # Apply filter
-  filtered <- dplyr::filter(data, .data[[filter_col]] >= threshold)
-  
+  filtered <- dplyr::filter(data, data[[filter_col]] >= threshold)
+
   Sys.sleep(runif(1, 0.5, 2))  # Simulate processing time
-  
+
   list(
     dataset_id = dataset_id,
     total_records = n,
@@ -71,7 +71,7 @@ args_list <- purrr::map(1:12, ~ list(
 # Add intentional error cases
 args_list[[5]] <- list(
   dataset_id = NULL,         # error: dataset_id missing
-  filter_col = "score", 
+  filter_col = "score",
   threshold = 75
 )
 args_list[[7]] <- list(      # error: invalid filter_col
@@ -97,7 +97,7 @@ stirr_job <- bakerrr::bakerrr(
   fun = process_data,
   args_list = args_list,
   n_daemons = min(4, length(args_list)),
-  
+
   # Note how parameters are passed to callr::r_bg()
   bg_args = list(
     stdout = "bakerrr_out.log",

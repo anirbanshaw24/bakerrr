@@ -20,6 +20,7 @@ Imports:
     S7
 Suggests: 
     knitr,
+    lintr,
     qpdf,
     rmarkdown,
     spelling,

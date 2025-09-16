@@ -1,8 +1,10 @@
 
 #' Summary method for bakerrr S7 job objects
 #'
-#' Provides a one-line summary of a \code{bakerrr} job object, indicating the status,
-#' function name, number of worker daemons, and total jobs. Prints a status icon and brief job info.
+#' Provides a one-line summary of a \code{bakerrr} job object,
+#' indicating the status,
+#' function name, number of worker daemons, and total jobs.
+#' Prints a status icon and brief job info.
 #'
 #' @param x A \code{bakerrr} S7 job object.
 #' @param ... Additional arguments (currently ignored).
@@ -20,7 +22,9 @@ S7::method(summary, bakerrr) <- function(x, ...) {
   status <- if (!is.null(x@bg_job_status)) {
     if (x@bg_job_status$is_alive()) "running"
     else "completed"
-  } else "created"
+  } else {
+    "created"
+  }
 
   status_icon <- switch(
     status,

@@ -1,10 +1,12 @@
 
 #' Background parallel processing of jobs using purrr and tryCatch
 #'
-#' Executes a list of job specifications in parallel, applies the given function with error handling,
+#' Executes a list of job specifications in parallel,
+#' applies the given function with error handling,
 #' and collects the results or error messages.
 #'
-#' @param jobs A list of job specifications, each containing a function (\code{fun}) and arguments (\code{args}).
+#' @param jobs A list of job specifications, each containing
+#' a function (\code{fun}) and arguments (\code{args}).
 #'
 #' @importFrom glue glue
 #' @importFrom purrr imap in_parallel
@@ -18,12 +20,11 @@ bg_func <- function(jobs) {
         tryCatch({
           do.call(x$fun, x$args)
         },
-          error = function(e) {
-            glue::glue(
-              "Error in purrr::in_parallel: {conditionMessage(e)}"
-            )
-          }
-        )
+        error = function(e) {
+          glue::glue(
+            "Error in purrr::in_parallel: {conditionMessage(e)}"
+          )
+        })
       }
     )
   )
@@ -31,7 +32,8 @@ bg_func <- function(jobs) {
 
 #' Generic for running background jobs in bakerrr
 #'
-#' Initiates background execution for a bakerrr job object, launching jobs via \code{callr::r_bg}.
+#' Initiates background execution for a bakerrr job object,
+#' launching jobs via \code{callr::r_bg}.
 #' Stores process status in \code{bg_job_status}.
 #'
 #' @param x A \code{bakerrr} S7 job object.
@@ -61,7 +63,8 @@ S7::method(run_bg, bakerrr) <- function(x) {
 #' and optionally waits for results. Cleans up daemons after execution.
 #'
 #' @param job A \code{bakerrr} S7 job object.
-#' @param wait_for_results Logical; whether to block and wait for completion (default: TRUE).
+#' @param wait_for_results Logical; whether to block
+#' and wait for completion (default: TRUE).
 #' @param ... Not used. For future expansion.
 #'
 #' @return The updated \code{bakerrr} job object, invisibly.
@@ -72,7 +75,9 @@ S7::method(run_bg, bakerrr) <- function(x) {
 #'
 #' @export
 run_jobs <- S7::new_generic("run_jobs", c("job", "wait_for_results"))
-S7::method(run_jobs, list(bakerrr, S7::class_logical)) <- function(job, wait_for_results) {
+S7::method(
+  run_jobs, list(bakerrr, S7::class_logical)
+) <- function(job, wait_for_results) {
 
   mirai::daemons(job@n_daemons)
 
@@ -80,7 +85,11 @@ S7::method(run_jobs, list(bakerrr, S7::class_logical)) <- function(job, wait_for
 
   if (wait_for_results) {
     console_spinner <- cli::make_spinner(
-      "clock", template = " - bakerrr:: Waiting for background parallel job to finish... {spin}"
+      "clock",
+      template = glue::glue(
+        " - bakerrr:: Waiting for background ",
+        "parallel job to finish... {{spin}}"
+      )
     )
 
     while (TRUE) {

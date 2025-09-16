@@ -1,18 +1,24 @@
 
 #' S7 bakerrr class for job orchestration and background processing
 #'
-#' Defines the \code{bakerrr} S7 class for parallel and background job execution.
-#' Stores the function to run (\code{fun}), argument lists (\code{args_list}),
-#' background job arguments (\code{bg_args}), job objects, results, and runtime properties.
-#' Supports retrieval of job status/results and validation of provided properties.
+#' Defines the \code{bakerrr} S7 class for parallel and
+#' background job execution.
+#' Stores the function to run (\code{fun}),
+#' argument lists (\code{args_list}),
+#' background job arguments (\code{bg_args}),
+#' job objects, results, and runtime properties.
+#' Supports retrieval of job status/results and
+#' validation of provided properties.
 #'
 #' @param fun Function to be executed for each job.
 #' @param args_list List of argument sets for each job.
 #' @param bg_args List of arguments passed to background job handler.
 #' @param n_daemons Number of parallel workers (default: ceiling of cores/5).
-#' @param cleanup Logical; whether to clean up jobs after execution (default: TRUE).
+#' @param cleanup Logical; whether to clean up jobs after
+#' execution (default: TRUE).
 #'
-#' @return An S7 bakerrr class object with job orchestration methods and properties.
+#' @return An S7 bakerrr class object with job orchestration
+#' methods and properties.
 #'
 #' @import S7
 #' @importFrom parallel detectCores
@@ -43,8 +49,14 @@ bakerrr <- S7::new_class(
       class = S7::class_list,
       getter = function(self) {
         if (is.null(self@bg_job_status)) {
-          " - bakerrr:: Job not started. Start job by calling run_jobs function."
-        } else if (!is.null(self@bg_job_status) && !self@bg_job_status$is_alive()) {
+          glue::glue(
+            " - bakerrr:: Job not started. ",
+            "Start job by calling run_jobs function."
+          )
+        } else if (
+          !is.null(self@bg_job_status) &&
+            !self@bg_job_status$is_alive()
+        ) {
           self@bg_job_status$get_result()
         } else {
           self@bg_job_status$get_status()
@@ -57,7 +69,8 @@ bakerrr <- S7::new_class(
   constructor = function(
     fun, args_list, bg_args = list(),
     n_daemons = ceiling(parallel::detectCores() / 5),
-    cleanup = TRUE) {
+    cleanup = TRUE
+  ) {
     S7::new_object(
       S7::S7_object(),
       fun = fun,

@@ -6,7 +6,13 @@ describe("Jobs are run in background and in parallel", {
 
   it("run_jobs executes and returns correct results", {
     add <- function(x, y) x + y
-    obj <- bakerrr(add, list(list(x = 2, y = 3), list(x = 0, y = -1)), n_daemons = 2)
+    obj <- bakerrr(
+      add,
+      list(
+        list(x = 2, y = 3),
+        list(x = 0, y = -1)
+      ), n_daemons = 2
+    )
     obj <- run_jobs(obj, wait_for_results = TRUE)
     res <- obj@results
 
