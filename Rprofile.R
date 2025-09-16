@@ -4,3 +4,4 @@ options(
     P3M = "https://packagemanager.posit.co/cran/__linux__/centos8/latest"
   )
 )
+options(pkgdown.internet = FALSE)

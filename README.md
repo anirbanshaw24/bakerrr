@@ -1,17 +1,5 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # bakerrr ⏲️
 
@@ -20,23 +8,27 @@ knitr::opts_chunk$set(
 
 Elegant S7-based parallel job orchestration for R
 
-\code{bakerrr} provides a clean, modern interface for running background parallel jobs using S7 classes, mirai daemons, and callr process management. Perfect for computationally intensive workflows that need robust error handling and progress monitoring.
+provides a clean, modern interface for running background parallel jobs
+using S7 classes, mirai daemons, and callr process management. Perfect
+for computationally intensive workflows that need robust error handling
+and progress monitoring.
 
 ### Features
 
- - S7 Class System: Type-safe, modern R object system
- - Parallel Processing: Efficient daemon-based parallelization via mirai
- - Background Execution: Non-blocking job execution with callr::r_bg
- - Error Resilience: Built-in tryCatch error handling per job
- - Progress Monitoring: Console spinner with live status updates
- - Flexible Configuration: Customizable daemon count and cleanup options
- - Clean API: Intuitive print(), summary(), and run_jobs() methods
+- S7 Class System: Type-safe, modern R object system
+- Parallel Processing: Efficient daemon-based parallelization via mirai
+- Background Execution: Non-blocking job execution with callr::r_bg
+- Error Resilience: Built-in tryCatch error handling per job
+- Progress Monitoring: Console spinner with live status updates
+- Flexible Configuration: Customizable daemon count and cleanup options
+- Clean API: Intuitive print(), summary(), and run_jobs() methods
 
 ## Installation
 
-You can install the development version of bakerrr from [GitHub](https://github.com/) with:
+You can install the development version of bakerrr from
+[GitHub](https://github.com/) with:
 
-```{r eval=FALSE}
+``` r
 # Install from GitHub
 pak::pak("anirbanshaw24/bakerrr")
 
@@ -46,7 +38,7 @@ devtools::install_github("anirbanshaw24/bakerrr")
 
 ## Quick Start
 
-```{r}
+``` r
 # Define your function
 compute_sum <- function(x, y) {
   Sys.sleep(1)  # Simulate work
@@ -71,12 +63,33 @@ job <- bakerrr::bakerrr(
 
 # Check results
 job@results
+#> [[1]]
+#> [1] 3
+#> 
+#> [[2]]
+#> [1] 7
+#> 
+#> [[3]]
+#> [1] 11
+#> 
+#> [[4]]
+#> [1] 15
 #> [[1]] [1] 3
 #> [[2]] [1] 7  
 #> [[3]] [1] 11
 #> [[4]] [1] 15
 
 print(job)
+#> 
+#> ✅ bakerrr
+#> ├─ Status: COMPLETED
+#> ├─ Function: function (x, y)  {     Sys.sleep(1)     x + y }
+#> ├─ Args: 4 sets
+#> ├─ Daemons: 2
+#> ├─ Cleanup: enabled
+#> ├─ Process alive: FALSE
+#> ├─ Result:
+#> │  └─ List with 4 elements
 #> ✅ bakerrr
 #> ├─ Status: COMPLETED
 #> ├─ Function: compute_sum
@@ -92,7 +105,7 @@ print(job)
 
 ### Error Handling
 
-```{r}
+``` r
 # Function that may fail
 risky_function <- function(x) {
   if (x == "error") stop("Intentional error")
@@ -108,15 +121,22 @@ args_list <- list(
 job <- bakerrr::bakerrr(risky_function, args_list) |>
   bakerrr::run_jobs()
 job@results
+#> [[1]]
+#> [1] 10
+#> 
+#> [[2]]
+#> Error in purrr::in_parallel: Intentional error
+#> 
+#> [[3]]
+#> [1] 20
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
 #> [[3]] [1] 20
-
 ```
 
 ### Background Job Arguments
 
-```{r}
+``` r
 # Custom logging and process options
 job <- bakerrr::bakerrr(
   fun = compute_sum,
@@ -128,12 +148,11 @@ job <- bakerrr::bakerrr(
   )
 ) |>
   bakerrr::run_jobs()
-
 ```
 
 ### Asynchronous Execution
 
-```{r}
+``` r
 long_running_function <- function() {
   Sys.sleep(5)
 }
@@ -143,6 +162,8 @@ job <- bakerrr::bakerrr(long_running_function, args_list) |>
 
 # Check status later
 summary(job)
+#>           Length           Class1           Class2             Mode 
+#>                1 bakerrr::bakerrr        S7_object           object
 #> ⏳ BackgroundParallelJob [running] - 4 daemons, 10 jobs
 
 # Get results when ready
@@ -153,16 +174,18 @@ if (!job@bg_job_status$is_alive()) {
 
 ## Performance Tips
 
- - Optimal Daemon Count: Start with ceiling(cores / 5), adjust based on workload
- - Batch Size: Group small tasks to reduce overhead
- - Memory Usage: Monitor with bg_args = list(supervise = TRUE)
- - Error Recovery: Use tryCatch in your functions for custom error handling
+- Optimal Daemon Count: Start with ceiling(cores / 5), adjust based on
+  workload
+- Batch Size: Group small tasks to reduce overhead
+- Memory Usage: Monitor with bg_args = list(supervise = TRUE)
+- Error Recovery: Use tryCatch in your functions for custom error
+  handling
 
 ## Dependencies
 
- - S7: Modern object system
- - mirai: High-performance parallelization
- - callr: Background R processes
- - purrr: Functional programming toolkit
- - cli: Progress indicators
- - glue: String interpolation
+- S7: Modern object system
+- mirai: High-performance parallelization
+- callr: Background R processes
+- purrr: Functional programming toolkit
+- cli: Progress indicators
+- glue: String interpolation
