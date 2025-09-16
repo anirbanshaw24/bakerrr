@@ -1,6 +1,6 @@
 Package: bakerrr
 Title: Run parallel-background jobs in R
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Anirban", "Shaw", , "anirbanshaw24@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4021-513X"))
@@ -8,6 +8,8 @@ Description: Run parallel-background jobs in R using.  Provides flexible
     utilities to launch, track, and control any R function as a parallel
     background process, with robust status, error, and result monitoring.
 License: MIT + file LICENSE
+URL: https://github.com/anirbanshaw24/bakerrr
+BugReports: https://github.com/anirbanshaw24/bakerrr/issues
 Imports: 
     callr,
     carrier,
@@ -27,8 +29,8 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Config/testthat/edition: 3
-Language: en-US
