@@ -1,0 +1,24 @@
+Package: bakerrr
+Title: Run parallel-background jobs in R
+Version: 0.0.0.9000
+Authors@R: 
+    person("Anirban", "Shaw", , "anirbanshaw24@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-4021-513X"))
+Description: Run parallel-background jobs in R using.  Provides flexible
+    utilities to launch, track, and control any R function as a parallel
+    background process, with robust status, error, and result monitoring.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    callr,
+    cli,
+    glue,
+    mirai,
+    purrr,
+    S7
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

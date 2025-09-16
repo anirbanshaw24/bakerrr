@@ -1,0 +1,83 @@
+---
+title: "Stirring Parallel Jobs in background with {bakerrr}"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Stirring Parallel Jobs with bakerrr}
+  %\VignetteEngine{rmarkdown::render}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Overview
+
+The `{bakerrr}` S7 class enables efficient background and parallel job orchestration in R, making it easy to apply a function to multiple sets of arguments using configurable daemons. This vignette demonstrates usage with sample inputs and inspects job status and results.
+
+## Job Architecture
+
+ - Daemons: Background R processes that execute jobs in parallel
+ - Arguments List: Each element contains named arguments for the target function
+ - Results Collection: Automatic aggregation with error capture and reporting
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Setup
+
+Define a simple function and generate a list of argument sets, introducing a mix of numeric and non-numeric (error-producing) cases.
+
+```{r, include=TRUE}
+fun <- function(x, y) {
+  Sys.sleep(2)
+  x + y
+}
+
+# Note how each list item is a set of arguments for the function above.
+args_list <- list(
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = "p", y = ceiling(rnorm(1) * 10)),  # Intentional type error
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  # Add more sets as needed
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10))
+)
+```
+
+### Creating and Running Jobs
+
+Instantiate a bakerrr object and process jobs in parallel with configurable daemon count.
+
+```{r, include=TRUE}
+new_stirr <- bakerrr::bakerrr(
+  fun,
+  args_list,
+  n_daemons = 4
+  # bg_args = list(stdout = "out.log", stderr = "error.log")
+) |>
+  bakerrr::run_jobs(wait_for_results = TRUE)
+
+```
+
+### Inspecting Status and Results
+
+Print job summary and view results. Note that jobs triggering errors report the error messages as designed.
+
+```{r, include=TRUE}
+print(new_stirr)
+new_stirr@results
+
+```
+
+### Notes
+
+ - Use n_daemons to control parallel worker count based on available cores.
+ - Error handling is built in; results will include error messages for failed jobs.
+ - You can pass additional background job options via bg_args.
+ - For more details, see function-level documentation or explore extending with additional job handlers and reporting tools.

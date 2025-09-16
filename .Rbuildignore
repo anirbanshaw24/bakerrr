@@ -1,0 +1,12 @@
+^renv$
+^renv\.lock$
+^bakerrr\.Rproj$
+^\.Rproj\.user$
+^\.Rprofile\.R$
+^dev$
+
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^LICENSE\.md$
+^README\.Rmd$

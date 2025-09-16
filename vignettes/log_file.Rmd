@@ -1,0 +1,114 @@
+---
+title: "Log to File"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Efficient Parallel Job Orchestration with bakerrr}
+  %\VignetteEngine{rmarkdown::render}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE  # Set to TRUE when running interactively
+)
+```
+
+### Passing arguments to `callr::r_bg()`
+
+`{bakerrr}` uses `callr::r_bg()` under the hood. All `r_bg()` arguments can be passed via the `bg_args` argument in `bakerrr()`
+
+#### Setup a sample function and its args_list
+
+```{r}
+# Example: Data processing pipeline
+process_data <- function(dataset_id, filter_col, threshold) {
+  # Input validation
+  if (is.null(dataset_id) || !is.character(dataset_id)) {
+    stop("Invalid or missing dataset_id: must be character and non-null.")
+  }
+  if (!filter_col %in% c("score", "value", "rating")) {
+    stop("filter_col must be one of 'score', 'value', or 'rating'.")
+  }
+  if (!is.numeric(threshold) || threshold <= 0) {
+    stop("threshold must be positive numeric.")
+  }
+  
+  # Simulate loading data
+  set.seed(as.integer(sub("DS_", "", dataset_id))) # Reproducible per job
+  n <- sample(100:500, 1)
+  data <- tibble::tibble(
+    id = seq_len(n),
+    score = round(runif(n, 0, 100)),
+    value = round(rnorm(n, 50, 15)),
+    rating = sample(1:10, n, replace = TRUE)
+  )
+  
+  # Apply filter
+  filtered <- dplyr::filter(data, .data[[filter_col]] >= threshold)
+  
+  Sys.sleep(runif(1, 0.5, 2))  # Simulate processing time
+  
+  list(
+    dataset_id = dataset_id,
+    total_records = n,
+    filtered_records = nrow(filtered),
+    filter_applied = paste(filter_col, ">=", threshold),
+    timestamp = Sys.time(),
+    preview = head(filtered, 3)
+  )
+}
+
+# Generate robust argument sets
+set.seed(42)
+args_list <- purrr::map(1:12, ~ list(
+  dataset_id = paste0("DS_", .x),
+  filter_col = sample(c("score", "value", "rating"), 1),
+  threshold = sample(50:95, 1)
+))
+
+# Add intentional error cases
+args_list[[5]] <- list(
+  dataset_id = NULL,         # error: dataset_id missing
+  filter_col = "score", 
+  threshold = 75
+)
+args_list[[7]] <- list(      # error: invalid filter_col
+  dataset_id = "DS_7",
+  filter_col = "unknown_col",
+  threshold = 80
+)
+
+args_list[[9]] <- list(      # error: invalid threshold
+  dataset_id = "DS_9",
+  filter_col = "score",
+  threshold = -15
+)
+
+```
+
+#### Write outputs and errors to file while running jobs
+
+When initiating the stirrer with `bakerrr::bakerrr()`, pass any `callr::r_bg()` arguments to `bg_args` argument as below:
+
+```{r}
+stirr_job <- bakerrr::bakerrr(
+  fun = process_data,
+  args_list = args_list,
+  n_daemons = min(4, length(args_list)),
+  
+  # Note how parameters are passed to callr::r_bg()
+  bg_args = list(
+    stdout = "bakerrr_out.log",
+    stderr = "bakerrr_err.log"
+  )
+)
+
+# Execute with real-time monitoring
+stirr_job <- stirr_job |>
+  bakerrr::run_jobs(wait_for_results = TRUE)
+
+# Get results
+stirr_job@results
+```
