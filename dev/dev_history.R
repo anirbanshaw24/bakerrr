@@ -8,3 +8,5 @@ pkgload::load_all(
   export_all = FALSE,
   attach_testthat = FALSE
 )
+
+covr::report(file = "validation/coverage.html")

@@ -25,6 +25,9 @@ jobs:
       - name: Run tests
         run: Rscript -e 'devtools::test()'
 
+      - name: Show Coverage
+        run: Rscript -e 'covr::package_coverage()'
+
       - name: Run coverage and upload to Codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

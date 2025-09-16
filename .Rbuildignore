@@ -4,7 +4,6 @@
 ^\.Rproj\.user$
 ^\.Rprofile\.R$
 ^dev$
-
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
@@ -14,3 +13,4 @@
 ^Meta$
 ^Rprofile.R$
 ^\.github$
+^validation$
