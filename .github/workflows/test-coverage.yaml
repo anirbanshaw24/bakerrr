@@ -30,12 +30,11 @@ jobs:
 
       - name: Generate Coverage Report
         run: |
-          Rscript -e 'covr::codecov(quiet = FALSE, file = "coverage.xml")'
-          ls -lh coverage.xml
+          Rscript -e 'covr::codecov(quiet = FALSE, file = "validation/coverage.xml")'
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage.xml
+          files: validation/coverage.xml
           slug: anirbanshaw24/bakerrr
