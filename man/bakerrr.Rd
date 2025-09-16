@@ -21,16 +21,22 @@ bakerrr(
 
 \item{n_daemons}{Number of parallel workers (default: ceiling of cores/5).}
 
-\item{cleanup}{Logical; whether to clean up jobs after execution (default: TRUE).}
+\item{cleanup}{Logical; whether to clean up jobs after
+execution (default: TRUE).}
 }
 \value{
-An S7 bakerrr class object with job orchestration methods and properties.
+An S7 bakerrr class object with job orchestration
+methods and properties.
 }
 \description{
-Defines the \code{bakerrr} S7 class for parallel and background job execution.
-Stores the function to run (\code{fun}), argument lists (\code{args_list}),
-background job arguments (\code{bg_args}), job objects, results, and runtime properties.
-Supports retrieval of job status/results and validation of provided properties.
+Defines the \code{bakerrr} S7 class for parallel and
+background job execution.
+Stores the function to run (\code{fun}),
+argument lists (\code{args_list}),
+background job arguments (\code{bg_args}),
+job objects, results, and runtime properties.
+Supports retrieval of job status/results and
+validation of provided properties.
 }
 \examples{
 # Create a bakerrr object to process jobs in parallel

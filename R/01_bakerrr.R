@@ -21,6 +21,7 @@
 #' methods and properties.
 #'
 #' @import S7
+#' @import carrier
 #' @importFrom parallel detectCores
 #'
 #' @examples

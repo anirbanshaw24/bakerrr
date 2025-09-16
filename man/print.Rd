@@ -12,7 +12,10 @@
 The input \code{x}, invisibly, after printing the summary.
 }
 \description{
-Displays a concise summary of the \code{bakerrr} job object, including current status,
-function name, number of argument sets, daemon count, cleanup setting, process status, and result summary.
-Outputs a status icon and key runtime information for quick inspection.
+Displays a concise summary of the \code{bakerrr} job object,
+including current status,
+function name, number of argument sets, daemon count,
+cleanup setting, process status, and result summary.
+Outputs a status icon and key runtime information for
+quick inspection.
 }

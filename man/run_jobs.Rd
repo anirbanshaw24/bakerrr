@@ -9,7 +9,8 @@ run_jobs(job, wait_for_results, ...)
 \arguments{
 \item{job}{A \code{bakerrr} S7 job object.}
 
-\item{wait_for_results}{Logical; whether to block and wait for completion (default: TRUE).}
+\item{wait_for_results}{Logical; whether to block
+and wait for completion (default: TRUE).}
 
 \item{...}{Not used. For future expansion.}
 }

@@ -1,4 +1,8 @@
-url: ~
+
 template:
   bootstrap: 5
   bootswatch: flatly
+  assets:
+    local: true
+
+url: https://github.com/anirbanshaw24/bakerrr

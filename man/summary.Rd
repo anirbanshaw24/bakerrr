@@ -15,6 +15,8 @@ summary(x, ...)
 The input \code{x}, invisibly, after printing the summary.
 }
 \description{
-Provides a one-line summary of a \code{bakerrr} job object, indicating the status,
-function name, number of worker daemons, and total jobs. Prints a status icon and brief job info.
+Provides a one-line summary of a \code{bakerrr} job object,
+indicating the status,
+function name, number of worker daemons, and total jobs.
+Prints a status icon and brief job info.
 }

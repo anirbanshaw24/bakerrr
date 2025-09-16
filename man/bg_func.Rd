@@ -7,12 +7,14 @@
 bg_func(jobs)
 }
 \arguments{
-\item{jobs}{A list of job specifications, each containing a function (\code{fun}) and arguments (\code{args}).}
+\item{jobs}{A list of job specifications, each containing
+a function (\code{fun}) and arguments (\code{args}).}
 }
 \value{
 A list of results, with error messages in case of failure.
 }
 \description{
-Executes a list of job specifications in parallel, applies the given function with error handling,
+Executes a list of job specifications in parallel,
+applies the given function with error handling,
 and collects the results or error messages.
 }

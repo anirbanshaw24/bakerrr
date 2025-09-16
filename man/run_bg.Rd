@@ -15,6 +15,7 @@ run_bg(x, ...)
 The input \code{x}, invisibly, after launching background jobs.
 }
 \description{
-Initiates background execution for a bakerrr job object, launching jobs via \code{callr::r_bg}.
+Initiates background execution for a bakerrr job object,
+launching jobs via \code{callr::r_bg}.
 Stores process status in \code{bg_job_status}.
 }

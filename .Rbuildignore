@@ -11,6 +11,6 @@
 ^README\.Rmd$
 ^doc$
 ^Meta$
-^Rprofile.R$
+^.Rprofile$
 ^\.github$
 ^validation$
