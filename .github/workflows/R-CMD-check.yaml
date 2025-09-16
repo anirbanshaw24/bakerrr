@@ -7,49 +7,84 @@ on:
     branches: [main]
 
 jobs:
-  R-CMD-check:
+  main:
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
     runs-on: ${{ matrix.config.os }}
+
+    timeout-minutes: 60
+
     strategy:
+      fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest, r: '4.3'}
-          - {os: macos-latest, r: '4.3'}
-          - {os: windows-latest, r: '4.3'}
+        - {os: macOS-latest,   r: 'release'}
+        - {os: windows-latest, r: 'release'}
+        - {os: ubuntu-latest, r: 'release'}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set up R
+      - name: Setup Pandoc for windows-latest
+        if: matrix.config.os == 'windows-latest'
+        run: |
+          Set-ExecutionPolicy AllSigned
+          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+          choco install pandoc
+
+      - name: Setup Pandoc for ubuntu-latest
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install -y r-cran-xml
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev
+
+      - name: Setup Pandoc for macOS-latest
+        if: matrix.config.os == 'macOS-latest'
+        run: |
+          brew install pandoc
+
+      - name: Install R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
 
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
+      - name: Install dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 2
+          needs: check
+          pak-version: 'stable'
+          extra-packages: any::devtools, any::optparse, local::.
+
+      - name: R CMD check
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--as-cran")'
+          error-on: '"note"'
+          check-dir: '"check"'
+
+      - name: Lint
+        if: always()
+        shell: Rscript {0}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev qpdf
+          lints <- lintr::lint_package()
+          for (lint in lints) print(lint)
+          quit(status = length(lints) > 0)
 
-      - name: Install R package dependencies
+      - name: Spell Check
+        if : always()
+        shell: Rscript {0}
         run: |
-          install.packages('remotes')
-          remotes::install_deps(dependencies = TRUE)
+          spell_check <- spelling::spell_check_package(use_wordlist = TRUE)
+          cli::cli_alert_warning("There are {nrow(spell_check)} spelling error{?s}.")
+          if (nrow(spell_check) > 0) {
+            print(spell_check)
+          }
+          quit(status = nrow(spell_check) > 0)
 
-      - name: Install development packages
+      - name: Test coverage
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
         run: |
-          install.packages(c('devtools','roxygen2','pkgdown','lintr','testthat','covr'))
-
-      - name: Normalize file timestamps
-        run: |
-          find . -type f -exec touch {} +
-
-      - name: Check package
-        run: |
-          R CMD build .
-          R CMD check *.tar.gz --as-cran
-
-      - name: Run lintr
-        run: R -e "lintr::lint_package()"
-
-      - name: Run spell check
-        run: R -e "devtools::spell_check()"
+          Rscript -e 'covr::codecov()'
