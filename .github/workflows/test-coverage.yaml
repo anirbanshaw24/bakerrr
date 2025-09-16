@@ -1,4 +1,4 @@
-name: R-CMD-check + Test Coverage
+name: Test Coverage
 
 on:
   push:
