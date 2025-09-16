@@ -28,8 +28,8 @@ jobs:
       - name: Show Coverage
         run: Rscript -e 'covr::package_coverage()'
 
-      - name: Run coverage and upload to Codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: |
-          Rscript -e 'covr::codecov()'
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: anirbanshaw24/bakerrr
