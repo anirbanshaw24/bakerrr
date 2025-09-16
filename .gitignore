@@ -45,3 +45,5 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+/doc/
+/Meta/

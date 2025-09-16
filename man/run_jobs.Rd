@@ -4,12 +4,14 @@
 \alias{run_jobs}
 \title{Run bakerrr jobs and wait for completion}
 \usage{
-run_jobs(job, ...)
+run_jobs(job, wait_for_results, ...)
 }
 \arguments{
 \item{job}{A \code{bakerrr} S7 job object.}
 
 \item{wait_for_results}{Logical; whether to block and wait for completion (default: TRUE).}
+
+\item{...}{Not used. For future expansion.}
 }
 \value{
 The updated \code{bakerrr} job object, invisibly.

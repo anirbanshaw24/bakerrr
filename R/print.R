@@ -21,31 +21,45 @@ S7::method(print, bakerrr) <- function(x, ...) {
     else "completed"
   } else "created"
 
-  status_icon <- switch(status,
-                        "created" = "🔄", "running" = "⏳",
-                        "completed" = "✅", "failed" = "❌", "🔍"
+  print_constants <- get_print_constants()
+
+  status_icon <- switch(
+    status,
+    "created" = print_constants$emojis$created,
+    "running" = print_constants$emojis$running,
+    "completed" = print_constants$emojis$completed,
+    "failed" = print_constants$emojis$failed,
+    print_constants$emojis$default
   )
 
   cat(sprintf("\n%s bakerrr\n", status_icon))
-  cat(sprintf("├─ Status: %s\n", toupper(status)))
-  cat(sprintf("├─ Function: %s\n", if (!is.null(x@fun)) deparse1(x@fun)[1] else "<none>"))
+  cat(sprintf("%s Status: %s\n", print_constants$non_ascii_chars$horizontal_t, toupper(status)))
+  cat(sprintf("%s Function: %s\n", print_constants$non_ascii_chars$horizontal_t, if (!is.null(x@fun)) deparse1(x@fun)[1] else "<none>"))
 
   args_len <- length(x@args_list)
-  cat(sprintf("├─ Args: %d sets\n", args_len))
-  cat(sprintf("├─ Daemons: %d\n", x@n_daemons))
-  cat(sprintf("├─ Cleanup: %s\n", ifelse(x@cleanup, "enabled", "disabled")))
+  cat(sprintf("%s Args: %d sets\n", print_constants$non_ascii_chars$horizontal_t, args_len))
+  cat(sprintf("%s Daemons: %d\n", print_constants$non_ascii_chars$horizontal_t, x@n_daemons))
+  cat(sprintf("%s Cleanup: %s\n", print_constants$non_ascii_chars$horizontal_t, ifelse(x@cleanup, "enabled", "disabled")))
   if (!is.null(x@bg_job_status)) {
-    cat(sprintf("├─ Process alive: %s\n", x@bg_job_status$is_alive()))
+    cat(sprintf("%s Process alive: %s\n", print_constants$non_ascii_chars$horizontal_t, x@bg_job_status$is_alive()))
   }
 
   # Results summary
   result <- tryCatch(x@results, error = function(e) NULL)
   if (!is.null(result)) {
-    cat("├─ Result:\n")
-    cat(sprintf("│  └─ %s\n",
-                if (is.list(result)) sprintf("List with %d elements", length(result))
-                else if (is.character(result)) substr(result, 1, 50)
-                else paste("<", class(result)[1], ">", sep = "")
+    cat(
+      glue::glue(
+        "{print_constants$non_ascii_chars$horizontal_t} Result:\n"
+      )
+    )
+    cat(sprintf(
+      glue::glue(
+        .trim = FALSE,
+        "\n     {print_constants$non_ascii_chars$horizontal_l} %s"
+      ),
+      if (is.list(result)) sprintf("List with %d elements", length(result))
+      else if (is.character(result)) substr(result, 1, 50)
+      else paste("<", class(result)[1], ">", sep = "")
     ))
   }
   cat("\n")

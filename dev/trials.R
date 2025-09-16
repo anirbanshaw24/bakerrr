@@ -33,9 +33,13 @@ new_stirr <- bakerrr(
   #   stderr = "error.log"
   # )
 ) |>
-  run_jobs(wait_for_results = TRUE)
-new_stirr |>
-  print()
+  run_jobs(wait_for_results = FALSE)
 
 new_stirr@results
+
+new_stirr |>
+  print() |>
+  summary() |>
+  status()
+
 

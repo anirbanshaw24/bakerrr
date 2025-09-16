@@ -2,8 +2,8 @@
 title: "Log to File"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Efficient Parallel Job Orchestration with bakerrr}
-  %\VignetteEngine{rmarkdown::render}
+  %\VignetteIndexEntry{Efficient Parallel Job Orchestration with bakerrr with}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -90,7 +90,7 @@ args_list[[9]] <- list(      # error: invalid threshold
 
 #### Write outputs and errors to file while running jobs
 
-When initiating the stirrer with `bakerrr::bakerrr()`, pass any `callr::r_bg()` arguments to `bg_args` argument as below:
+When initiating the bakerrr with `bakerrr::bakerrr()`, pass any `callr::r_bg()` arguments to `bg_args` argument as below:
 
 ```{r}
 stirr_job <- bakerrr::bakerrr(

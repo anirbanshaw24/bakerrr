@@ -10,3 +10,6 @@
 ^pkgdown$
 ^LICENSE\.md$
 ^README\.Rmd$
+^doc$
+^Meta$
+^Rprofile.R$

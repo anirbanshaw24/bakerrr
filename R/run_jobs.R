@@ -62,6 +62,7 @@ S7::method(run_bg, bakerrr) <- function(x) {
 #'
 #' @param job A \code{bakerrr} S7 job object.
 #' @param wait_for_results Logical; whether to block and wait for completion (default: TRUE).
+#' @param ... Not used. For future expansion.
 #'
 #' @return The updated \code{bakerrr} job object, invisibly.
 #'
@@ -70,8 +71,9 @@ S7::method(run_bg, bakerrr) <- function(x) {
 #' @importFrom cli make_spinner
 #'
 #' @export
-run_jobs <- S7::new_generic("run_jobs", "job")
-S7::method(run_jobs, bakerrr) <- function(job, wait_for_results = TRUE) {
+run_jobs <- S7::new_generic("run_jobs", c("job", "wait_for_results"))
+S7::method(run_jobs, list(bakerrr, S7::class_logical)) <- function(job, wait_for_results) {
+
   mirai::daemons(job@n_daemons)
 
   job <- job |> run_bg()

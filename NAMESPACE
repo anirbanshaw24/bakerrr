@@ -3,6 +3,8 @@
 export(bakerrr)
 export(print)
 export(run_jobs)
+export(status)
+export(summary)
 import(S7)
 importFrom(S7,method)
 importFrom(S7,new_generic)
