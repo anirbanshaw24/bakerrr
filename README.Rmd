@@ -16,8 +16,11 @@ knitr::opts_chunk$set(
 # bakerrr ⏲️ <a href="https://anirbanshaw24.github.io/bakerrr"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
+[![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml)
+[![LintR-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml)
+[![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
+[![Test coverage](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yml)
+[![Codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
 ## Elegant S7-based parallel job orchestration for R

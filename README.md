@@ -5,8 +5,12 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
+[![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml)
+[![LintR-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml)
+[![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
+[![Test
+coverage](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yml)
+[![Codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
 ## Elegant S7-based parallel job orchestration for R
@@ -115,7 +119,7 @@ args_list <- list(
 job <- bakerrr::bakerrr(risky_function, args_list) |>
   bakerrr::run_jobs(wait_for_results = FALSE)
 job@results
-#> [1] "running"
+#> [1] "sleeping"
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
 #> [[3]] [1] 20
