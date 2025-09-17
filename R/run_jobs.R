@@ -7,6 +7,7 @@
 #'
 #' @param jobs A list of job specifications, each containing
 #' a function (\code{fun}) and arguments (\code{args}).
+#' @param n_daemons Number of parallel workers
 #'
 #' @importFrom glue glue
 #' @importFrom purrr imap in_parallel

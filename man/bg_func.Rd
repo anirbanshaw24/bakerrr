@@ -9,6 +9,8 @@ bg_func(jobs, n_daemons)
 \arguments{
 \item{jobs}{A list of job specifications, each containing
 a function (\code{fun}) and arguments (\code{args}).}
+
+\item{n_daemons}{Number of parallel workers}
 }
 \value{
 A list of results, with error messages in case of failure.
