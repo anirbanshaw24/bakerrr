@@ -10,7 +10,7 @@
 [![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
 [![Test
 coverage](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-coverage.yml)
-[![Codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
+[![Codecov](https://app.codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://app.codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
 ## Elegant S7-based parallel job orchestration for R
