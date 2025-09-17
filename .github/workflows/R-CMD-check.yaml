@@ -9,9 +9,7 @@ on:
 jobs:
   main:
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
     runs-on: ${{ matrix.config.os }}
-
     timeout-minutes: 60
 
     strategy:
@@ -20,70 +18,86 @@ jobs:
         config:
         - {os: macOS-latest,   r: 'release'}
         - {os: windows-latest, r: 'release'}
-        - {os: ubuntu-latest, r: 'release'}
+        - {os: ubuntu-latest,  r: 'release'}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Pandoc for windows-latest
-        if: matrix.config.os == 'windows-latest'
-        run: |
-          Set-ExecutionPolicy AllSigned
-          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-          choco install pandoc
-
-      - name: Setup Pandoc for ubuntu-latest
+      - name: Setup system dependencies (Ubuntu)
         if: matrix.config.os == 'ubuntu-latest'
         run: |
-          sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install -y r-cran-xml
-          sudo apt-get install -y libharfbuzz-dev libfribidi-dev
+          sudo apt-get update
+          sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfontconfig1-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev \
+            pandoc
 
-      - name: Setup Pandoc for macOS-latest
+      - name: Setup Pandoc (macOS)
         if: matrix.config.os == 'macOS-latest'
-        run: |
-          brew install pandoc
+        run: brew install pandoc
 
-      - name: Install R
+      - name: Setup Pandoc (Windows)
+        if: matrix.config.os == 'windows-latest'
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
+          use-public-rspm: true
 
-      - name: Install curl from source with static OpenSSL
-        if: matrix.config.os == 'ubuntu-latest'
-        run: |
-          R -e 'install.packages("curl", type="source", configure.args="--with-static-libssl")'
-
-      - name: Install dependencies
+      - name: Setup R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache-version: 2
           needs: check
-          pak-version: 'stable'
-          extra-packages: any::devtools, any::optparse, local::.
+          extra-packages: |
+            any::devtools
+            any::optparse
+            any::lintr
+            any::spelling
+            local::.
 
       - name: R CMD check
         uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--no-manual", "--as-cran")'
           error-on: '"warning"'
-          check-dir: '"check"'
+          upload-snapshots: true
 
       - name: Lint
         if: always()
         shell: Rscript {0}
         run: |
+          if (!require("lintr", quietly = TRUE)) {
+            install.packages("lintr")
+          }
           lints <- lintr::lint_package()
           for (lint in lints) print(lint)
           quit(status = length(lints) > 0)
 
       - name: Spell Check
-        if : always()
+        if: always()
         shell: Rscript {0}
         run: |
+          if (!require("spelling", quietly = TRUE)) {
+            install.packages("spelling")
+          }
           spell_check <- spelling::spell_check_package(use_wordlist = TRUE)
-          cli::cli_alert_warning("There are {nrow(spell_check)} spelling error{?s}.")
+          if (!require("cli", quietly = TRUE)) {
+            cat("There are", nrow(spell_check), "spelling errors.\n")
+          } else {
+            cli::cli_alert_warning("There are {nrow(spell_check)} spelling error{?s}.")
+          }
           if (nrow(spell_check) > 0) {
             print(spell_check)
           }

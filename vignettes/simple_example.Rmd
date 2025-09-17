@@ -1,8 +1,8 @@
 ---
-title: "Baking Parallel Jobs in background with bakerrr"
+title: "Bake Parallel Jobs in Background with bakerrr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Baking Parallel Jobs in background with bakerrr}
+  %\VignetteIndexEntry{Bake Parallel Jobs in Background with bakerrr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

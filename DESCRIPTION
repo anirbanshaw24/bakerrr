@@ -8,7 +8,7 @@ Description: Run parallel-background jobs in R using.  Provides flexible
     utilities to launch, track, and control any R function as a parallel
     background process, with robust status, error, and result monitoring.
 License: MIT + file LICENSE
-URL: https://github.com/anirbanshaw24/bakerrr
+URL: https://anirbanshaw24.github.io/bakerrr
 BugReports: https://github.com/anirbanshaw24/bakerrr/issues
 Imports: 
     callr,

@@ -1,8 +1,31 @@
 
 template:
-  bootstrap: 5
-  bootswatch: flatly
-  assets:
-    local: true
-
-url: https://github.com/anirbanshaw24/bakerrr
+  favicon: "pkgdown/favicon.ico"
+  light-switch: true
+  bslib:
+    version: 5
+    fg: "#000"
+    bg: "#FDF3E7"
+    primary: "#C68642"
+    secondary: "#F5C26B"
+    light: "#F0E1C6"
+    dark: "#7B4B3A"
+    success: "#A8D5BA"
+    info: "#B0D7F1"
+    warning: "#F7C6CE"
+    danger: "#D94F6A"
+    base_font: {google: "Roboto"}
+    heading_font: {google: "Roboto Slab"}
+    code_font: {google: "JetBrains Mono"}
+deploy:
+  install_metadata: true
+navbar:
+ components:
+   articles:
+    text: Articles
+    menu:
+    - text: Bake Parallel Jobs in Background with bakerrr
+      href: articles/simple_example.html
+    - text: Logging to File
+      href: articles/log_file.html
+url: https://anirbanshaw24.github.io/bakerrr

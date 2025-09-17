@@ -13,18 +13,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-# bakerrr ⏲️
+# bakerrr ⏲️ ![favicon](pkgdown/favicon.ico)
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
-Elegant S7-based parallel job orchestration for R
+## Elegant S7-based parallel job orchestration for R
 
-\code{bakerrr} provides a clean, modern interface for running background parallel jobs using S7 classes, mirai daemons, and callr process management. Perfect for computationally intensive workflows that need robust error handling and progress monitoring.
+The package \code{bakerrr} provides a clean, modern interface for running background parallel jobs using S7 classes, mirai daemons, and callr process management. Perfect for computationally intensive workflows that need robust error handling and progress monitoring.
 
-### Features
+## Features
 
  - S7 Class System: Type-safe, modern R object system
  - Parallel Processing: Efficient daemon-based parallelization via mirai

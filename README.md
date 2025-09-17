@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bakerrr ⏲️
+# bakerrr ⏲️ ![favicon](pkgdown/favicon.ico)
 
 <!-- badges: start -->
 
@@ -9,14 +9,14 @@
 [![codecov](https://codecov.io/gh/anirbanshaw24/bakerrr/branch/dev/graph/badge.svg?token=JUTW42674L)](https://codecov.io/gh/anirbanshaw24/bakerrr)
 <!-- badges: end -->
 
-Elegant S7-based parallel job orchestration for R
+## Elegant S7-based parallel job orchestration for R
 
-provides a clean, modern interface for running background parallel jobs
-using S7 classes, mirai daemons, and callr process management. Perfect
-for computationally intensive workflows that need robust error handling
-and progress monitoring.
+The package provides a clean, modern interface for running background
+parallel jobs using S7 classes, mirai daemons, and callr process
+management. Perfect for computationally intensive workflows that need
+robust error handling and progress monitoring.
 
-### Features
+## Features
 
 - S7 Class System: Type-safe, modern R object system
 - Parallel Processing: Efficient daemon-based parallelization via mirai
@@ -115,7 +115,7 @@ args_list <- list(
 job <- bakerrr::bakerrr(risky_function, args_list) |>
   bakerrr::run_jobs(wait_for_results = FALSE)
 job@results
-#> [1] "sleeping"
+#> [1] "running"
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
 #> [[3]] [1] 20

@@ -1,8 +1,8 @@
 ---
-title: "Log to File"
+title: "Logging to File"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Log to File}
+  %\VignetteIndexEntry{Logging to File}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
