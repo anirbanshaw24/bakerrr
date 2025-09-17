@@ -1,5 +1,6 @@
 
 chore <- function() {
+  spelling::update_wordlist()
   devtools::document()
   devtools::build_readme()
   devtools::build_vignettes()

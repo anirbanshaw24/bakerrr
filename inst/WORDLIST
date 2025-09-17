@@ -1,10 +1,11 @@
 CMD
+Codecov
 Customizable
+LintR
 args
 bg
 callr
 cli
-codecov
 mirai
 parallelization
 purrr
