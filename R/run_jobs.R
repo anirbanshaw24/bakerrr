@@ -12,8 +12,9 @@
 #' @importFrom purrr imap in_parallel
 #'
 #' @return A list of results, with error messages in case of failure.
-bg_func <- function(jobs) {
-  purrr::imap(
+bg_func <- function(jobs, n_daemons) {
+  mirai::daemons(n_daemons)
+  results <- purrr::imap(
     jobs,
     purrr::in_parallel(
       \(x, y) {
@@ -28,6 +29,8 @@ bg_func <- function(jobs) {
       }
     )
   )
+  mirai::daemons(0)
+  results
 }
 
 #' Generic for running background jobs in bakerrr
@@ -45,10 +48,11 @@ bg_func <- function(jobs) {
 #' @return The input \code{x}, invisibly, after launching background jobs.
 run_bg <- S7::new_generic("run_bg", "x")
 S7::method(run_bg, bakerrr) <- function(x) {
+
   x@bg_job_status <- do.call(
     callr::r_bg, args = c(
       list(
-        func = bg_func, args = list(x@jobs)
+        func = bg_func, args = list(x@jobs, x@n_daemons)
       ),
       x@bg_args
     )
@@ -79,8 +83,6 @@ S7::method(
   run_jobs, list(bakerrr, S7::class_logical)
 ) <- function(job, wait_for_results) {
 
-  mirai::daemons(job@n_daemons)
-
   job <- job |> run_bg()
 
   if (wait_for_results) {
@@ -98,11 +100,9 @@ S7::method(
         break
       } else {
         console_spinner$spin()
-        Sys.sleep(0.25)
       }
     }
   }
 
-  mirai::daemons(0)
   invisible(job)
 }

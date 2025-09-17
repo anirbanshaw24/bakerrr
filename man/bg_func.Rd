@@ -4,7 +4,7 @@
 \alias{bg_func}
 \title{Background parallel processing of jobs using purrr and tryCatch}
 \usage{
-bg_func(jobs)
+bg_func(jobs, n_daemons)
 }
 \arguments{
 \item{jobs}{A list of job specifications, each containing

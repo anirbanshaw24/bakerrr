@@ -22,6 +22,8 @@ Imports:
     S7
 Suggests: 
     covr,
+    DT,
+    htmltools,
     knitr,
     lintr,
     qpdf,
