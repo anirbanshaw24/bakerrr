@@ -20,6 +20,9 @@ jobs:
       - name: Install lintr
         run: Rscript -e 'renv::restore(prompt = FALSE)'
 
+      - name: Install package
+        run: Rscript -e 'install.packages(".", repos = NULL, type = "source")'
+
       - name: Run lintr
         shell: Rscript {0}
         run: |
