@@ -21,7 +21,7 @@ jobs:
         run: Rscript -e 'install.packages("lintr")'
 
       - name: Install package
-        run: Rscript -e 'install.packages(".", repos = NULL, type = "source")'
+        run: Rscript -e 'devtools::install()'
 
       - name: Run lintr
         shell: Rscript {0}
