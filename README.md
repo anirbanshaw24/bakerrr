@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bakerrr ⏲️ <a href="https://anirbanshaw24.github.io/bakerrr"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# bakerrr ⏲️ <a href="https://anirbanshaw24.github.io/bakerrr/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
