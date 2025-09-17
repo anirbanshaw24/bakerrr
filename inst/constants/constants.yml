@@ -1,0 +1,12 @@
+default:
+  print:
+    emojis:
+      created: "🔄"
+      running: "⏳"
+      completed: "✅"
+      failed: "❌"
+      default: "🔍"
+    non_ascii_chars:
+      horizontal_t: "├─"
+      horizontal_l: "└─"
+      vertical_line: "│"
