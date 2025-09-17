@@ -119,7 +119,7 @@ args_list <- list(
 job <- bakerrr::bakerrr(risky_function, args_list) |>
   bakerrr::run_jobs(wait_for_results = FALSE)
 job@results
-#> [1] "running"
+#> [1] "sleeping"
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
 #> [[3]] [1] 20

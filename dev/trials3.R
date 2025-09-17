@@ -39,16 +39,16 @@ print.long_stat_calc <- function(x, ...) {
 }
 
 args_list <- list(
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002),
-  list(rnorm(100), n_boot = 8000, sleep_time = 0.002)
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002),
+  list(rnorm(100), n_boot = 3000, sleep_time = 0.002)
 )
 
 
@@ -65,7 +65,7 @@ system.time({
     ),
     .f = long_stat_calc,
     .args = list(
-      n_boot = 8000, sleep_time = 0.002
+      n_boot = 3000, sleep_time = 0.002
     )
   )
   res[.progress]
