@@ -1,5 +1,6 @@
 
 chore <- function() {
+  lintr::lint_package()
   spelling::update_wordlist()
   devtools::document()
   devtools::build_readme()
@@ -17,3 +18,12 @@ pkgload::load_all(
   export_all = FALSE,
   attach_testthat = FALSE
 )
+
+lintr::lint_package()
+spelling::update_wordlist()
+DT::datatable()
+htmltools::a()
+knitr::all_labels()
+qpdf::pdf_subset()
+rmarkdown::knitr_options()
+testthat::announce_snapshot_file()
