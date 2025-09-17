@@ -50,11 +50,6 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
-      - name: Install curl from source with static OpenSSL
-        if: matrix.config.os == 'ubuntu-latest'
-        run: |
-          R -e 'install.packages("curl", type="source", configure.args="--with-static-libssl")'
-
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -62,6 +57,17 @@ jobs:
           needs: check
           pak-version: 'stable'
           extra-packages: any::devtools, any::optparse, local::.
+
+      - name: Install system deps for curl
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libssl-dev libcurl4-openssl-dev libxml2-dev
+
+      - name: Install curl from source with static OpenSSL
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          R -e 'install.packages("curl", type="source", configure.args="--with-static-libssl")'
 
       - name: R CMD check
         uses: r-lib/actions/check-r-package@v2
