@@ -1,5 +1,6 @@
 
-chore <- function() {
+chores <- function() {
+  usethis::use_tidy_description()
   lintr::lint_package()
   spelling::update_wordlist()
   devtools::document()
@@ -12,7 +13,7 @@ chore <- function() {
   )
   pkgdown::build_site_github_pages()
 }
-chore()
+chores()
 
 pkgload::load_all(
   export_all = FALSE,

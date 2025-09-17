@@ -10,6 +10,8 @@ Description: Run background-parallel jobs in R using.  Provides flexible
 License: MIT + file LICENSE
 URL: https://github.com/anirbanshaw24/bakerrr
 BugReports: https://github.com/anirbanshaw24/bakerrr/issues
+Depends: 
+    R (>= 4.1.0)
 Imports: 
     callr,
     carrier,
