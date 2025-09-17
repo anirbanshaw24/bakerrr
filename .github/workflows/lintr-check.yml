@@ -20,8 +20,14 @@ jobs:
       - name: Install lintr
         run: Rscript -e 'install.packages("lintr")'
 
+      - name: Install lintr
+        run: Rscript -e 'install.packages("devtools")'
+
       - name: Install package
         run: Rscript -e 'devtools::install()'
+
+      - name: Load Package
+        run: Rscript -e 'library(bakerrr)'
 
       - name: Run lintr
         shell: Rscript {0}
