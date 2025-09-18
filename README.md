@@ -129,12 +129,14 @@ job@results
 
 ``` r
 # Custom logging and process options
+std_out_file <- tempfile("job_std_out", fileext = ".log")
+std_err_file <- tempfile("job_std_err", fileext = ".log")
 job <- bakerrr::bakerrr(
   fun = compute_sum,
   args_list = args_list,
   bg_args = list(
-    stdout = "job_output.log",
-    stderr = "job_errors.log",
+    stdout = std_out_file,
+    stderr = std_err_file,
     supervise = TRUE
   )
 ) |>
