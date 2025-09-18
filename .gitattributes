@@ -1,1 +1,3 @@
-docs/* linguist-vendored
+docs/* linguist-documentation
+doc/* linguist-documentation
+validation/* linguist-documentation
