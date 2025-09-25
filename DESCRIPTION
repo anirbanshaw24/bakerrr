@@ -1,12 +1,15 @@
 Package: bakerrr
-Title: Background-Parallel Jobs in R
+Title: Background-Parallel Jobs
 Version: 0.1.0
 Authors@R:
     person("Anirban", "Shaw", , "anirbanshaw24@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4021-513X"))
-Description: Run background-parallel jobs in R using.  Provides flexible
-    utilities to launch, track, and control any R function as a parallel
-    background process, with robust status, error, and result monitoring.
+Description: Easily launch, track, and control functions as
+    background-parallel jobs. Includes robust utilities for job status,
+    error handling, resource monitoring, and result collection. Designed
+    for scalable workflows in interactive and automated settings (local or
+    remote). Integrates with multiple backends; supports flexible
+    automation pipelines and live job tracking.
 License: MIT + file LICENSE
 URL: https://github.com/anirbanshaw24/bakerrr
 BugReports: https://github.com/anirbanshaw24/bakerrr/issues

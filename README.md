@@ -15,10 +15,10 @@ coverage](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-covera
 
 ## Elegant S7-based parallel job orchestration for R
 
-The package provides a clean, modern interface for running background
-parallel jobs using S7 classes, mirai daemons, and callr process
-management. Perfect for computationally intensive workflows that need
-robust error handling and progress monitoring.
+provides a clean, modern interface for running background parallel jobs
+using S7 classes, mirai daemons, and callr process management. Perfect
+for computationally intensive workflows that need robust error handling
+and progress monitoring.
 
 ## Features
 
