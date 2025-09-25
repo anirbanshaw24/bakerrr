@@ -9,7 +9,8 @@ Description: Easily launch, track, and control functions as
     error handling, resource monitoring, and result collection. Designed
     for scalable workflows in interactive and automated settings (local or
     remote). Integrates with multiple backends; supports flexible
-    automation pipelines and live job tracking.
+    automation pipelines and live job tracking. For more information, see
+    <https://anirbanshaw24.github.io/bakerrr/>.
 License: MIT + file LICENSE
 URL: https://github.com/anirbanshaw24/bakerrr
 BugReports: https://github.com/anirbanshaw24/bakerrr/issues
