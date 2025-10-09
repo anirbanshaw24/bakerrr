@@ -2,7 +2,11 @@
 % Please edit documentation in R/print.R
 \name{print}
 \alias{print}
+\alias{summary}
 \title{Print method for bakerrr S7 job objects}
+\usage{
+summary(x, ...)
+}
 \arguments{
 \item{x}{A \code{bakerrr} S7 job object.}
 
