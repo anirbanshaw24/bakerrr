@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![CRAN](https://www.r-pkg.org/badges/version/bakerrr)](https://CRAN.R-project.org/bakerrr)
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml)
 [![LintR-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml)
 [![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
@@ -37,11 +38,7 @@ You can install the development version of bakerrr from
 [GitHub](https://github.com/) with:
 
 ``` r
-# Install from GitHub
-pak::pak("anirbanshaw24/bakerrr")
-
-# Or with devtools
-devtools::install_github("anirbanshaw24/bakerrr")
+install.packages("bakerrr")
 ```
 
 ## Quick Start
@@ -119,7 +116,7 @@ args_list <- list(
 job <- bakerrr::bakerrr(risky_function, args_list) |>
   bakerrr::run_jobs(wait_for_results = FALSE)
 job@results
-#> [1] "sleeping"
+#> [1] "running"
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
 #> [[3]] [1] 20
