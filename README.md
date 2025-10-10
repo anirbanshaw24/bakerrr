@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![CRAN](https://www.r-pkg.org/badges/version/yourpkg)](https://CRAN.R-project.org/bakerrr)
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml)
 [![LintR-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml)
 [![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
@@ -37,11 +38,7 @@ You can install the development version of bakerrr from
 [GitHub](https://github.com/) with:
 
 ``` r
-# Install from GitHub
-pak::pak("anirbanshaw24/bakerrr")
-
-# Or with devtools
-devtools::install_github("anirbanshaw24/bakerrr")
+install.packages("bakerrr")
 ```
 
 ## Quick Start
