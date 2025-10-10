@@ -190,7 +190,7 @@ long-running computations:</p>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.062   0.011  13.448</span></span>
+<span><span class="co">#&gt;   0.061   0.011  13.490</span></span>
 <span><span class="fu">mirai</span><span class="fu">::</span><span class="fu"><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">daemons</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>  <span class="co"># Clean up</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -213,7 +213,7 @@ management:</p>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;  14.430   2.927  13.898</span></span></code></pre></div>
+<span><span class="co">#&gt;  14.335   2.730  13.821</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="comparison">Comparison<a class="anchor" aria-label="anchor" href="#comparison"></a>
@@ -288,9 +288,9 @@ actual timing dependent on:</p>
 <span><span class="co">#&gt;  num -0.0305</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 3</span></span>
-<span><span class="co">#&gt;  $ boot_mean: num 0.0708</span></span>
+<span><span class="co">#&gt;  $ boot_mean: num 0.0713</span></span>
 <span><span class="co">#&gt;  $ boot_sd  : num 0.105</span></span>
-<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.50484275817871</span></span>
+<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.43045783042908</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "units")= chr "secs"</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr "long_stat_calc"</span></span>
 <span></span>
@@ -298,9 +298,9 @@ actual timing dependent on:</p>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -0.03050123</span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Bootstrap Mean: 0.07081717 </span></span>
-<span><span class="co">#&gt; Bootstrap SD:   0.1051424 </span></span>
-<span><span class="co">#&gt; Elapsed Time:   6.504843 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Bootstrap Mean: 0.07132461 </span></span>
+<span><span class="co">#&gt; Bootstrap SD:   0.1045766 </span></span>
+<span><span class="co">#&gt; Elapsed Time:   6.430458 seconds</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>

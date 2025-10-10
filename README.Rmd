@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 ## Elegant S7-based parallel job orchestration for R
 
-\code{bakerrr} provides a clean, modern interface for running background parallel jobs using S7 classes, mirai daemons, and callr process management. Perfect for computationally intensive workflows that need robust error handling and progress monitoring.
+{bakerrr} provides a clean, modern interface for running background parallel jobs using S7 classes, mirai daemons, and callr process management. Perfect for computationally intensive workflows that need robust error handling and progress monitoring.
 
 ## Features
 
