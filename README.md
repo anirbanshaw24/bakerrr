@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![CRAN](https://www.r-pkg.org/badges/version/bakerrr)](https://cran.r-project.org/web/packages/bakerrr)
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml)
 [![LintR-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml)
 [![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
@@ -15,10 +16,10 @@ coverage](https://github.com/anirbanshaw24/bakerrr/actions/workflows/test-covera
 
 ## Elegant S7-based parallel job orchestration for R
 
-provides a clean, modern interface for running background parallel jobs
-using S7 classes, mirai daemons, and callr process management. Perfect
-for computationally intensive workflows that need robust error handling
-and progress monitoring.
+{bakerrr} provides a clean, modern interface for running background
+parallel jobs using S7 classes, mirai daemons, and callr process
+management. Perfect for computationally intensive workflows that need
+robust error handling and progress monitoring.
 
 ## Features
 
@@ -37,11 +38,7 @@ You can install the development version of bakerrr from
 [GitHub](https://github.com/) with:
 
 ``` r
-# Install from GitHub
-pak::pak("anirbanshaw24/bakerrr")
-
-# Or with devtools
-devtools::install_github("anirbanshaw24/bakerrr")
+install.packages("bakerrr")
 ```
 
 ## Quick Start

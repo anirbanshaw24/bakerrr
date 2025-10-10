@@ -24,7 +24,7 @@ Imports:
     fs,
     glue,
     mirai,
-    purrr,
+    purrr (>= 1.1.0),
     S7
 Suggests: 
     covr,

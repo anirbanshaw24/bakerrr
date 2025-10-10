@@ -190,7 +190,7 @@ long-running computations:</p>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.059   0.012  13.420</span></span>
+<span><span class="co">#&gt;   0.061   0.011  13.432</span></span>
 <span><span class="fu">mirai</span><span class="fu">::</span><span class="fu"><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">daemons</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>  <span class="co"># Clean up</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -213,7 +213,7 @@ management:</p>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;  14.393   2.952  13.869</span></span></code></pre></div>
+<span><span class="co">#&gt;  14.424   2.992  13.934</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="comparison">Comparison<a class="anchor" aria-label="anchor" href="#comparison"></a>
@@ -288,9 +288,9 @@ actual timing dependent on:</p>
 <span><span class="co">#&gt;  num -0.0305</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 3</span></span>
-<span><span class="co">#&gt;  $ boot_mean: num 0.0692</span></span>
-<span><span class="co">#&gt;  $ boot_sd  : num 0.106</span></span>
-<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.48075532913208</span></span>
+<span><span class="co">#&gt;  $ boot_mean: num 0.0697</span></span>
+<span><span class="co">#&gt;  $ boot_sd  : num 0.107</span></span>
+<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.51880168914795</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "units")= chr "secs"</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr "long_stat_calc"</span></span>
 <span></span>
@@ -298,9 +298,9 @@ actual timing dependent on:</p>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -0.03050123</span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Bootstrap Mean: 0.06916381 </span></span>
-<span><span class="co">#&gt; Bootstrap SD:   0.1061862 </span></span>
-<span><span class="co">#&gt; Elapsed Time:   6.480755 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Bootstrap Mean: 0.0696902 </span></span>
+<span><span class="co">#&gt; Bootstrap SD:   0.1070601 </span></span>
+<span><span class="co">#&gt; Elapsed Time:   6.518802 seconds</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
@@ -342,7 +342,7 @@ minimal overhead, mirai could be the better choice.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices datasets  utils     methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] bakerrr_0.1.0 mirai_2.5.0  </span></span>
+<span><span class="co">#&gt; [1] bakerrr_0.2.0 mirai_2.5.0  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] vctrs_0.6.5       cli_3.6.5         knitr_1.50        rlang_1.1.6      </span></span>
