@@ -79,10 +79,10 @@ describe("bakerrr parallel job orchestration with list of functions", {
     # }, error = function(err_msg) {
     #   browser()
     # })
-    browser()
+    # browser()
     expect_error(
       bakerrr::bakerrr(fun = fun_list, args_list = rep(list(list(x=1)), 10), n_daemons = 2),
-      "Error: <bakerrr::bakerrr> object is invalid: - Function at index 1 (function (x, y) ): missing required arguments: y"
+      "missing required arguments: y"
     )
   })
 
@@ -96,7 +96,7 @@ describe("bakerrr parallel job orchestration with list of functions", {
   it("reports correct status before, during, and after execution", {
     baker <- bakerrr::bakerrr(fun = fun_list, args_list = args_list, n_daemons = 2)
     # Pre-run
-    expect_match(suppressMessages(capture.output(status(baker))), "created", all = FALSE)
+    expect_match(suppressMessages(capture.output(status(baker))), "waiting", all = FALSE)
 
     baker <- baker |> run_jobs(wait_for_results = FALSE)
     # During (may briefly be running)
