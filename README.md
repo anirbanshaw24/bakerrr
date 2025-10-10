@@ -82,21 +82,12 @@ job@results
 #> 
 #> [[4]]
 #> [1] 15
-#> [[1]] [1] 3
-#> [[2]] [1] 7  
-#> [[3]] [1] 11
-#> [[4]] [1] 15
 
 print(job)
-#> ✅ bakerrr
-#> ├─ Status: COMPLETED
-#> ├─ Function: compute_sum
-#> ├─ Args: 4 sets
-#> ├─ Daemons: 2
-#> ├─ Cleanup: enabled
-#> ├─ Process alive: FALSE
-#> ├─ Result:
-#> │  └─ List with 4 elements
+#>    [01] function (x, y) { Sys.sleep(1) x + y }
+#>    [02] function (x, y) { Sys.sleep(1) x + y }
+#>    [03] function (x, y) { Sys.sleep(1) x + y }
+#>    [04] function (x, y) { Sys.sleep(1) x + y }
 ```
 
 ## Advanced Usage
@@ -119,7 +110,7 @@ args_list <- list(
 job <- bakerrr::bakerrr(risky_function, args_list) |>
   bakerrr::run_jobs(wait_for_results = FALSE)
 job@results
-#> [1] "sleeping"
+#> [1] "running"
 #> [[1]] [1] 10
 #> [[2]] [1] "Error in purrr::in_parallel: Intentional error"
 #> [[3]] [1] 20
@@ -129,6 +120,18 @@ job@results
 
 ``` r
 # Custom logging and process options
+compute_sum <- function(x, y) {
+  Sys.sleep(1)  # Simulate work
+  x + y
+}
+
+# Create argument lists for each job
+args_list <- list(
+  list(x = 1, y = 2),
+  list(x = 3, y = 4),
+  list(x = 5, y = 6),
+  list(x = 7, y = 8)
+)
 job <- bakerrr::bakerrr(
   fun = compute_sum,
   args_list = args_list,

@@ -18,16 +18,15 @@
 #' @importFrom S7 method
 #'
 #' @export
-summary <- S7::new_generic("summary", "x")
-S7::method(summary, bakerrr) <- function(x, ...) {
-  print_constants <- get_print_constants()
-
+S7::method(print, bakerrr) <- function(x, ...) {
   status <- if (!is.null(x@bg_job_status)) {
     if (x@bg_job_status$is_alive()) "running"
     else "completed"
   } else {
     "created"
   }
+
+  print_constants <- get_print_constants()
 
   status_icon <- switch(
     status,
@@ -38,24 +37,38 @@ S7::method(summary, bakerrr) <- function(x, ...) {
     print_constants$emojis$default
   )
 
-  # Function summary: list or single
-  fun_summary <- if (is.list(x@fun) && all(purrr::map_lgl(x@fun, is.function))) {
-    sprintf("<list of %d functions>", length(x@fun))
-  } else if (is.function(x@fun)) {
-    # Use first line of body, trim if long
-    fun_str <- paste(deparse(x@fun), collapse = " ")
-    if (nchar(fun_str) > 40) fun_str <- paste0(substr(fun_str, 1, 37), "...")
-    fun_str
-  } else {
-    "<none>"
+  cat(sprintf("\n%s bakerrr\n", status_icon))
+  cat(sprintf("%s Status: %s\n", print_constants$non_ascii_chars$horizontal_t, toupper(status)))
+
+  # Print full function body (first 2 lines of deparse for each function)
+  cat(sprintf("%s Functions:\n", print_constants$non_ascii_chars$horizontal_t))
+  funs <- if (is.function(x@fun)) rep(list(x@fun), length(x@args_list)) else x@fun
+  for (i in seq_along(funs)) {
+    fstr <- tryCatch(deparse(funs[[i]]), error = function(e) "<error>")
+    # Collapse and trim the first few lines for compact display (signature + first operation)
+    fstr_disp <- paste(gsub("^\\s+|\\s+$","", fstr), collapse = " ")
+    cat(sprintf("   [%02d] %s\n", i, fstr_disp))
   }
 
-  cat(
-    sprintf(
-      "%s %s [%s] - %d daemons, %d jobs\n",
-      status_icon, fun_summary, status, x@n_daemons, length(x@args_list)
-    )
-  )
+  args_len <- length(x@args_list)
+  cat(sprintf("%s Args: %d sets\n", print_constants$non_ascii_chars$horizontal_t, args_len))
+  cat(sprintf("%s Daemons: %d\n", print_constants$non_ascii_chars$horizontal_t, x@n_daemons))
+  cat(sprintf("%s Cleanup: %s\n", print_constants$non_ascii_chars$horizontal_t, ifelse(x@cleanup, "enabled", "disabled")))
+  if (!is.null(x@bg_job_status)) {
+    cat(sprintf("%s Process alive: %s\n", print_constants$non_ascii_chars$horizontal_t, x@bg_job_status$is_alive()))
+  }
 
+  # Results summary
+  result <- tryCatch(x@results, error = function(e) NULL)
+  if (!is.null(result)) {
+    cat(glue::glue("{print_constants$non_ascii_chars$horizontal_t} Result:\n"))
+    cat(sprintf(
+      glue::glue(.trim = FALSE, "\n     {print_constants$non_ascii_chars$horizontal_l} %s"),
+      if (is.list(result)) sprintf("List with %d elements", length(result))
+      else if (is.character(result)) substr(result, 1, 50)
+      else paste("<", class(result)[1], ">", sep = "")
+    ))
+  }
+  cat("\n")
   invisible(x)
 }
