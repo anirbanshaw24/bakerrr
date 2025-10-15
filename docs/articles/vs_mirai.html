@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bakerrr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,35 +108,35 @@ long-running computations:</p>
 <span></span>
 <span><span class="va">long_stat_calc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n_boot</span>, <span class="va">sleep_time</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># x: numeric vector</span></span>
-<span>  <span class="co"># n_boot: number of bootstraps  </span></span>
+<span>  <span class="co"># n_boot: number of bootstraps</span></span>
 <span>  <span class="co"># sleep_time: pause after each bootstrap (sec)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Input x must be numeric."</span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Input x must have at least 2 values."</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">start_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="va">boot_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="va">n_boot</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n_boot</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">boot_means</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">x</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="va">sleep_time</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="va">sleep_time</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">end_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    boot_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">boot_means</span><span class="op">)</span>,</span>
-<span>    boot_sd   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">boot_means</span><span class="op">)</span>, </span>
+<span>    boot_sd   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">boot_means</span><span class="op">)</span>,</span>
 <span>    elapsed   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/difftime.html" class="external-link">difftime</a></span><span class="op">(</span><span class="va">end_time</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"long_stat_calc"</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span>  <span class="va">result</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Print method for easy reporting</span></span>
 <span><span class="va">print.long_stat_calc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Bootstrap Mean:"</span>, <span class="va">x</span><span class="op">$</span><span class="va">boot_mean</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Bootstrap SD:  "</span>, <span class="va">x</span><span class="op">$</span><span class="va">boot_sd</span>, <span class="st">"\n"</span><span class="op">)</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Bootstrap SD:  "</span>, <span class="va">x</span><span class="op">$</span><span class="va">boot_sd</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Elapsed Time:  "</span>, <span class="va">x</span><span class="op">$</span><span class="va">elapsed</span>, <span class="st">"seconds\n"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 </div>
@@ -146,16 +146,16 @@ long-running computations:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Arguments for 10 parallel jobs</span></span>
 <span><span class="va">args_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -169,28 +169,28 @@ long-running computations:</p>
 <span></span>
 <span><span class="va">mirai_timing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">mirai</span><span class="fu">::</span><span class="fu"><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">daemons</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>  <span class="co"># Start 6 daemon processes</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">mirai</span><span class="fu">::</span><span class="fu"><a href="https://mirai.r-lib.org/reference/mirai_map.html" class="external-link">mirai_map</a></span><span class="op">(</span></span>
 <span>    .x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, </span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span>    <span class="op">)</span>,</span>
 <span>    .f <span class="op">=</span> <span class="va">long_stat_calc</span>,</span>
 <span>    .args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>n_boot <span class="op">=</span> <span class="fl">3000</span>, sleep_time <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="co"># Check progress and collect results</span></span>
 <span>  <span class="va">res</span><span class="op">[</span><span class="va">.progress</span><span class="op">]</span></span>
 <span>  <span class="va">mirai_results</span> <span class="op">&lt;-</span> <span class="va">res</span><span class="op">[</span><span class="va">.flat</span><span class="op">]</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">■■■■                            </span>  10% | ETA:  1m</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■          </span>  70% | ETA:  5s</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■          </span>  70% | ETA:  6s</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.057   0.011  13.266</span></span>
+<span><span class="co">#&gt;   0.057   0.008  13.375</span></span>
 <span><span class="fu">mirai</span><span class="fu">::</span><span class="fu"><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">daemons</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>  <span class="co"># Clean up</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -204,16 +204,16 @@ management:</p>
 <span>    <span class="va">long_stat_calc</span>,</span>
 <span>    args_list <span class="op">=</span> <span class="va">args_list</span>,</span>
 <span>    n_daemons <span class="op">=</span> <span class="fl">6</span></span>
-<span>    <span class="co"># Optional: bg_args = list(stdout = "out.log", stderr = "error.log")  </span></span>
+<span>    <span class="co"># Optional: bg_args = list(stdout = "out.log", stderr = "error.log") # nolint</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">bakerrr</span><span class="fu">::</span><span class="fu"><a href="../reference/run_jobs.html">run_jobs</a></span><span class="op">(</span>wait_for_results <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">bakerrr_results</span> <span class="op">&lt;-</span> <span class="va">baker</span><span class="op">@</span><span class="va">results</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;  13.837   1.412  13.683</span></span></code></pre></div>
+<span><span class="co">#&gt;  14.228   2.785  13.728</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="comparison">Comparison<a class="anchor" aria-label="anchor" href="#comparison"></a>
@@ -288,9 +288,9 @@ actual timing dependent on:</p>
 <span><span class="co">#&gt;  num -0.0305</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 3</span></span>
-<span><span class="co">#&gt;  $ boot_mean: num 0.0693</span></span>
-<span><span class="co">#&gt;  $ boot_sd  : num 0.105</span></span>
-<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.37411308288574</span></span>
+<span><span class="co">#&gt;  $ boot_mean: num 0.071</span></span>
+<span><span class="co">#&gt;  $ boot_sd  : num 0.106</span></span>
+<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.45765423774719</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "units")= chr "secs"</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr "long_stat_calc"</span></span>
 <span></span>
@@ -298,9 +298,9 @@ actual timing dependent on:</p>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -0.03050123</span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Bootstrap Mean: 0.06934597 </span></span>
-<span><span class="co">#&gt; Bootstrap SD:   0.1051565 </span></span>
-<span><span class="co">#&gt; Elapsed Time:   6.374113 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Bootstrap Mean: 0.07097443 </span></span>
+<span><span class="co">#&gt; Bootstrap SD:   0.1056289 </span></span>
+<span><span class="co">#&gt; Elapsed Time:   6.457654 seconds</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
@@ -342,7 +342,7 @@ minimal overhead, mirai could be the better choice.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices datasets  utils     methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] bakerrr_0.1.0 mirai_2.5.0  </span></span>
+<span><span class="co">#&gt; [1] bakerrr_0.2.0 mirai_2.5.0  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] vctrs_0.6.5       cli_3.6.5         knitr_1.50        rlang_1.1.6      </span></span>

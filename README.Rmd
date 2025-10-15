@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # bakerrr ⏲️ <a href="https://anirbanshaw24.github.io/bakerrr/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
+[![CRAN](https://www.r-pkg.org/badges/version/bakerrr)](https://CRAN.R-project.org/package=bakerrr)
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml)
 [![LintR-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml)
 [![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
@@ -25,7 +26,7 @@ knitr::opts_chunk$set(
 
 ## Elegant S7-based parallel job orchestration for R
 
-The package \code{bakerrr} provides a clean, modern interface for running background parallel jobs using S7 classes, mirai daemons, and callr process management. Perfect for computationally intensive workflows that need robust error handling and progress monitoring.
+{bakerrr} provides a clean, modern interface for running background parallel jobs using S7 classes, mirai daemon(s), and callr process management. Perfect for computationally intensive workflows that need robust error handling and progress monitoring.
 
 ## Features
 
@@ -39,19 +40,15 @@ The package \code{bakerrr} provides a clean, modern interface for running backgr
 
 ## Installation
 
-You can install the development version of bakerrr from [GitHub](https://github.com/) with:
+You can install the development version of bakerrr from [CRAN]( https://CRAN.R-project.org/package=bakerrr) with:
 
-```{r eval=FALSE}
-# Install from GitHub
-pak::pak("anirbanshaw24/bakerrr")
-
-# Or with devtools
-devtools::install_github("anirbanshaw24/bakerrr")
+```{r install_bakerrr, eval=FALSE}
+install.packages("bakerrr")
 ```
 
 ## Quick Start
 
-```{r}
+```{r quick_start}
 # Define your function
 compute_sum <- function(x, y) {
   Sys.sleep(1)  # Simulate work
@@ -76,28 +73,15 @@ job <- bakerrr::bakerrr(
 
 # Check results
 job@results
-#> [[1]] [1] 3
-#> [[2]] [1] 7  
-#> [[3]] [1] 11
-#> [[4]] [1] 15
 
 print(job)
-#> ✅ bakerrr
-#> ├─ Status: COMPLETED
-#> ├─ Function: compute_sum
-#> ├─ Args: 4 sets
-#> ├─ Daemons: 2
-#> ├─ Cleanup: enabled
-#> ├─ Process alive: FALSE
-#> ├─ Result:
-#> │  └─ List with 4 elements
 ```
 
 ## Advanced Usage
 
 ### Error Handling
 
-```{r}
+```{r advanced_usage}
 # Function that may fail
 risky_function <- function(x) {
   if (x == "error") stop("Intentional error")
@@ -121,8 +105,20 @@ job@results
 
 ### Background Job Arguments
 
-```{r}
+```{r pass_bg_job_arguments}
 # Custom logging and process options
+compute_sum <- function(x, y) {
+  Sys.sleep(1)  # Simulate work
+  x + y
+}
+
+# Create argument lists for each job
+args_list <- list(
+  list(x = 1, y = 2),
+  list(x = 3, y = 4),
+  list(x = 5, y = 6),
+  list(x = 7, y = 8)
+)
 job <- bakerrr::bakerrr(
   fun = compute_sum,
   args_list = args_list,
@@ -138,7 +134,7 @@ job <- bakerrr::bakerrr(
 
 ### Asynchronous Execution
 
-```{r}
+```{r async_execution}
 long_running_function <- function() {
   Sys.sleep(5)
 }
@@ -148,12 +144,61 @@ job <- bakerrr::bakerrr(long_running_function, args_list) |>
 
 # Check status later
 summary(job)
-#> ⏳ BackgroundParallelJob [running] - 4 daemons, 10 jobs
+#> ⏳ BackgroundParallelJob [running] - 4 daemon(s), 10 jobs
 
 # Get results when ready
 if (!job@bg_job_status$is_alive()) {
   results <- job@results
 }
+```
+
+### Multiple Functions in Parallel and in Background
+
+You can run multiple different functions, each with their own arguments, in parallel background jobs using {bakerrr}. Just supply a list of functions and a matching list of argument sets:
+
+```{r multiple_functions}
+# List of functions with different logic
+fun_list <- list(
+  function(x, y) x + y,
+  function(x, y) x * y,
+  function(x, y) x - y,
+  function(x, y) x / y,
+  function(x, y) x^y,
+  function(x, y) x %% y,
+  function(x, y) paste0(x, "-", y),
+  function(x, y) mean(c(x, y)),
+  function(x, y) max(x, y),
+  function(x, y) min(x, y)
+)
+
+# Corresponding list of argument sets
+set.seed(1)
+args_list <- list(
+  list(x = 3, y = 6),
+  list(x = "p", y = 2),              # type error
+  list(x = 5, y = 8),
+  list(x = 10, y = 2),
+  list(x = 2, y = 5),
+  list(x = 13, y = 4),
+  list(x = "A", y = 7),              # type error
+  list(x = 6, y = 9),
+  list(x = 3, y = 4),
+  list(x = 1, y = 2)
+)
+
+# Run jobs in parallel
+job <- bakerrr::bakerrr(
+  fun = fun_list,
+  args_list = args_list,
+  n_daemons = 4
+) |> bakerrr::run_jobs(wait_for_results = TRUE)
+
+# Inspect results and status
+job@results
+print(job)
+summary(job)
+bakerrr::status(job)
+
 ```
 
 ## Performance Tips
@@ -171,3 +216,23 @@ if (!job@bg_job_status$is_alive()) {
  - purrr: Functional programming toolkit
  - cli: Progress indicators
  - glue: String interpolation
+
+## Further Help & Documentation
+
+ - For full documentation, visit the [package website](https://anirbanshaw24.github.io/bakerrr/)
+ - API reference: [Reference manual](https://anirbanshaw24.github.io/bakerrr/reference/)
+ - Report issues: [GitHub Issues](https://github.com/anirbanshaw24/bakerrr/issues)
+
+## Troubleshooting
+
+ - Windows: Make sure Rtools is installed for compilation.
+ - Linux/macOS: Ensure system build tools (gcc, make, pandoc) are present.
+ - Parallel/job failures: Check job@results for error output; validate function arguments.
+ - Session Info: Please include output of sessionInfo() in bug reports.
+
+## Citation
+
+ - To cite bakerrr in publications, run:
+```{r citation}
+citation("bakerrr")
+```

@@ -1,10 +1,11 @@
 
 chores <- function() {
+  desc::desc_set("Date", as.character(Sys.Date()))
   usethis::use_tidy_description()
+  devtools::build_readme()
   lintr::lint_package()
   spelling::update_wordlist()
   devtools::document()
-  devtools::build_readme()
   devtools::build_vignettes()
   devtools::check()
   covr::report(

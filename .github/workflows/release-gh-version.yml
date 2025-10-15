@@ -1,0 +1,56 @@
+name: Github-release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release_gh_version:
+    name: Create Release
+    runs-on: ubuntu-latest  # Or your self-hosted runner
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract version from DESCRIPTION
+        id: get_version
+        run: |
+          VERSION=$(grep "^Version:" DESCRIPTION | awk '{print $2}')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create tag (if not exists)
+        id: tag_creation
+        run: |
+          set -e
+          VERSION=v${{ steps.get_version.outputs.version }}
+          git fetch --tags
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION already exists, skipping tag creation."
+            echo "created=false" >> $GITHUB_OUTPUT
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag $VERSION
+            git push origin $VERSION
+            echo "created=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create GitHub Release
+        if: steps.tag_creation.outputs.created != 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          VERSION: v${{ steps.get_version.outputs.version }}
+        run: |
+          API_URL="https://api.github.com/repos/$REPO/releases"
+          RESPONSE=$(curl -s -X POST "$API_URL" \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -d "{
+              \"tag_name\": \"$VERSION\",
+              \"name\": \"Release $VERSION\",
+              \"generate_release_notes\": true
+            }")
+          echo "$RESPONSE"
+          echo "${RESPONSE}" | grep -m 1 '"html_url":' | awk -F'"' '{print "Release URL: "$4}'

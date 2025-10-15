@@ -7,7 +7,7 @@ describe("bakerrr class is behaving as expected", {
   it("bakerrr constructor validates arguments", {
     expect_error(
       bakerrr(fun = "notafun", args_list = list()),
-      "*@fun must be <function>, not <character>*"
+      "*`fun` must be a function or list of functions*"
     )
 
     expect_error(
