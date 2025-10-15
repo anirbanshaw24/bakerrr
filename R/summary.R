@@ -16,7 +16,6 @@
 #' @return The input \code{x}, invisibly, after printing the summary.
 summary <- S7::new_generic("summary", "x")
 S7::method(summary, bakerrr) <- function(x, ...) {
-
   print_constants <- get_print_constants()
 
   status <- if (!is.null(x@bg_job_status)) {
@@ -28,23 +27,21 @@ S7::method(summary, bakerrr) <- function(x, ...) {
 
   status_icon <- switch(
     status,
-    "created" = print_constants$emojis$created,
-    "running" = print_constants$emojis$running,
+    "created"   = print_constants$emojis$created,
+    "running"   = print_constants$emojis$running,
     "completed" = print_constants$emojis$completed,
-    "failed" = print_constants$emojis$failed,
+    "failed"    = print_constants$emojis$failed,
     print_constants$emojis$default
   )
 
-  job_name <- if (!is.null(x@fun))
-    deparse(substitute(x@fun))[1]
-  else "BackgroundParallelJob"
+  funs <- if (is.function(x@fun)) rep(list(x@fun), length(x@args_list)) else x@fun
+  num_funs <- length(funs)
+  num_jobs <- length(x@args_list)
 
-  cat(
-    sprintf(
-      "%s %s [%s] - %d daemons, %d jobs\n",
-      status_icon, job_name, status, x@n_daemons, length(x@jobs)
-    )
-  )
+  cat(sprintf(
+    "%s bakerrr | Status: %s | Functions: %d | Daemons: %d | Jobs: %d\n",
+    status_icon, toupper(status), num_funs, x@n_daemons, num_jobs
+  ))
 
   invisible(x)
 }

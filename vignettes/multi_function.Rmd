@@ -1,0 +1,91 @@
+---
+title: "Orchestrating Multiple Functions in Parallel and in Background"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Orchestrating Multiple Functions in Parallel and in Background}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bakerrr)
+```
+
+# Creating a List of Functions and Argument Sets
+
+We define a list of ten functions with different mathematical and string operations. Each receives tailored arguments, including error-producing cases.
+
+```{r}
+fun_list <- list(
+  function(x, y) { Sys.sleep(2); x + y },
+  function(x, y) { Sys.sleep(2); x * y },
+  function(x, y) { Sys.sleep(2); x - y },
+  function(x, y) { Sys.sleep(2); x / y },
+  function(x, y) { Sys.sleep(2); x^y },
+  function(x, y) { Sys.sleep(2); x %% y },
+  function(x, y) { Sys.sleep(2); paste0(x, "-", y) },
+  function(x, y) { Sys.sleep(2); mean(c(x, y)) },
+  function(x, y) { Sys.sleep(2); max(x, y) },
+  function(x, y) { Sys.sleep(2); min(x, y) }
+)
+
+args_list <- list(
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = "p", y = ceiling(rnorm(1) * 10)),             # type error
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 5)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 3)),
+  list(x = sample(LETTERS, 1), y = ceiling(rnorm(1) * 10)), # likely type error
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10)),
+  list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10))
+)
+```
+
+# Running the Jobs
+
+Create a {bakerrr} object with parallel execution using four daemons, then execute and collect results.
+
+```{r}
+new_baker <- bakerrr(
+  fun = fun_list,
+  args_list = args_list,
+  n_daemons = 4
+) |>
+  run_jobs(wait_for_results = TRUE)
+```
+
+# Inspect Status and Results
+
+Examine job outcomes and statuses. Errors and return values are captured per job.
+
+
+```{r}
+new_baker@results
+
+new_baker |>
+  print()
+
+new_baker |>
+  summary()
+
+new_baker |>
+  status()
+```
+
+# Notes
+
+- {bakerrr} runs each function/argument pair in the background, improving throughput for batch operations.
+- Errors are reported in the results slot—you can test robustness for diverse function types and argument mismatches.
+- For fine-grained control, adjust n_daemons or supply additional job parameters via bg_args.
+- Check object summary and status for detailed job diagnostics.
+
+For more information, see the package reference and extended vignettes.

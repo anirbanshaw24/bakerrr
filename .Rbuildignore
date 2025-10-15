@@ -14,3 +14,5 @@
 ^.Rprofile$
 ^\.github$
 ^validation$
+^.*\.log$
+

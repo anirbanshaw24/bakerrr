@@ -24,7 +24,7 @@ args_list <- list(
   list(x = ceiling(rnorm(1) * 10), y = ceiling(rnorm(1) * 10))
 )
 
-new_stirr <- bakerrr(
+new_baker <- bakerrr(
   fun,
   args_list,
   n_daemons = 4
@@ -33,11 +33,11 @@ new_stirr <- bakerrr(
   #   stderr = "error.log"
   # )
 ) |>
-  run_jobs(wait_for_results = FALSE)
+  run_jobs(wait_for_results = TRUE)
 
-new_stirr@results
+new_baker@results
 
-new_stirr |>
+new_baker |>
   print() |>
   summary() |>
   status()
