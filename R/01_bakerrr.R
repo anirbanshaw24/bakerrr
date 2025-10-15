@@ -41,7 +41,9 @@ bakerrr <- S7::new_class(
       getter = function(self) {
         funs <- if (is.function(self@fun)) {
           rep(list(self@fun), length(self@args_list))
-        } else if (is.list(self@fun) && all(purrr::map_lgl(self@fun, is.function))) {
+        } else if (
+          is.list(self@fun) && all(purrr::map_lgl(self@fun, is.function))
+        ) {
           self@fun
         } else {
           stop("`fun` must be a function or list of functions")
@@ -91,7 +93,8 @@ bakerrr <- S7::new_class(
     if (length(funs) != length(args_list)) {
       stop(
         glue::glue(
-          "`fun` (length={length(funs)}) and `args_list` (length={length(args_list)}) must have the same length"
+          "`fun` (length={length(funs)}) and `args_list` ",
+          "(length={length(args_list)}) must have the same length"
         )
       )
     }
@@ -107,7 +110,9 @@ bakerrr <- S7::new_class(
   validator = function(self) {
     funs <- if (is.function(self@fun)) {
       rep(list(self@fun), length(self@args_list))
-    } else if (is.list(self@fun) && all(purrr::map_lgl(self@fun, is.function))) {
+    } else if (
+      is.list(self@fun) && all(purrr::map_lgl(self@fun, is.function))
+    ) {
       self@fun
     } else {
       return("@fun must be a function or list of functions.")
@@ -128,7 +133,8 @@ bakerrr <- S7::new_class(
         missing_args <- setdiff(fn_formals, names(args))
         if (length(missing_args) > 0) {
           to_return <- glue::glue(
-            "Function at index {i} ({deparse(f, nlines = 1)}): missing required arguments: {paste(missing_args, collapse = ', ')}"
+            "Function at index {i} ({deparse(f, nlines = 1)}): ",
+            "missing required arguments: {paste(missing_args, collapse = ', ')}"
           )
         } else {
           to_return <- NA_character_
@@ -141,7 +147,7 @@ bakerrr <- S7::new_class(
       return(paste(arg_validation, collapse = "\n"))
     }
     if (!is.numeric(self@n_daemons)) {
-      return("@n_daemons MUST be Numeric")
+      "@n_daemons MUST be Numeric"
     }
   }
 )

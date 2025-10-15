@@ -34,7 +34,10 @@ S7::method(summary, bakerrr) <- function(x, ...) {
     print_constants$emojis$default
   )
 
-  funs <- if (is.function(x@fun)) rep(list(x@fun), length(x@args_list)) else x@fun
+  funs <- if (is.function(x@fun))
+    rep(list(x@fun), length(x@args_list))
+  else
+    x@fun
   num_funs <- length(funs)
   num_jobs <- length(x@args_list)
 

@@ -24,16 +24,46 @@ We define a list of ten functions with different mathematical and string operati
 
 ```{r}
 fun_list <- list(
-  function(x, y) { Sys.sleep(2); x + y },
-  function(x, y) { Sys.sleep(2); x * y },
-  function(x, y) { Sys.sleep(2); x - y },
-  function(x, y) { Sys.sleep(2); x / y },
-  function(x, y) { Sys.sleep(2); x^y },
-  function(x, y) { Sys.sleep(2); x %% y },
-  function(x, y) { Sys.sleep(2); paste0(x, "-", y) },
-  function(x, y) { Sys.sleep(2); mean(c(x, y)) },
-  function(x, y) { Sys.sleep(2); max(x, y) },
-  function(x, y) { Sys.sleep(2); min(x, y) }
+  function(x, y) {
+    Sys.sleep(2)
+    x + y
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    x * y
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    x - y
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    x / y
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    x^y
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    x %% y
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    paste0(x, "-", y)
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    mean(c(x, y))
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    max(x, y)
+  },
+  function(x, y) {
+    Sys.sleep(2)
+    min(x, y)
+  }
 )
 
 args_list <- list(
