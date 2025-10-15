@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![CRAN](https://www.r-pkg.org/badges/version/bakerrr)](https://cran.r-project.org/web/packages/bakerrr)
+[![CRAN](https://www.r-pkg.org/badges/version/bakerrr)](https://CRAN.R-project.org/package=bakerrr)
 [![R-CMD-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/R-CMD-check.yml)
 [![LintR-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/lintr-check.yml)
 [![Spell-check](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml/badge.svg)](https://github.com/anirbanshaw24/bakerrr/actions/workflows/spell-check.yml)
@@ -35,7 +35,7 @@ robust error handling and progress monitoring.
 ## Installation
 
 You can install the development version of bakerrr from
-[CRAN](https://cran.r-project.org/web/packages/bakerrr/index.html) with:
+[CRAN](https://CRAN.R-project.org/package=bakerrr) with:
 
 ``` r
 install.packages("bakerrr")
