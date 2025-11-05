@@ -38,11 +38,13 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/simple_example.html">Bake Parallel Jobs in Background with bakerrr</a></li>
-    <li><a class="dropdown-item" href="../articles/log_file.html">Logging to File</a></li>
+<li><a class="dropdown-item" href="../articles/log_file.html">Logging to File</a></li>
+    <li><a class="dropdown-item" href="../articles/multi_function.html">Orchestrating Multiple Functions in Parallel and in Background</a></li>
+    <li><a class="dropdown-item" href="../articles/simple_example.html">Bake Parallel Jobs in Background with bakerrr</a></li>
+    <li><a class="dropdown-item" href="../articles/vs_mirai.html">mirai &amp; bakerrr</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -190,7 +192,7 @@ long-running computations:</p>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.057   0.008  13.375</span></span>
+<span><span class="co">#&gt;   0.059   0.007  13.381</span></span>
 <span><span class="fu">mirai</span><span class="fu">::</span><span class="fu"><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">daemons</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>  <span class="co"># Clean up</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -213,7 +215,7 @@ management:</p>
 <span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_timing</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;  14.228   2.785  13.728</span></span></code></pre></div>
+<span><span class="co">#&gt;  14.216   2.933  13.760</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="comparison">Comparison<a class="anchor" aria-label="anchor" href="#comparison"></a>
@@ -288,9 +290,9 @@ actual timing dependent on:</p>
 <span><span class="co">#&gt;  num -0.0305</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 3</span></span>
-<span><span class="co">#&gt;  $ boot_mean: num 0.071</span></span>
-<span><span class="co">#&gt;  $ boot_sd  : num 0.106</span></span>
-<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.45765423774719</span></span>
+<span><span class="co">#&gt;  $ boot_mean: num 0.0694</span></span>
+<span><span class="co">#&gt;  $ boot_sd  : num 0.104</span></span>
+<span><span class="co">#&gt;  $ elapsed  : 'difftime' num 6.4798436164856</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "units")= chr "secs"</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr "long_stat_calc"</span></span>
 <span></span>
@@ -298,9 +300,9 @@ actual timing dependent on:</p>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">mirai_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -0.03050123</span></span>
 <span><span class="fu"><a href="../reference/print.html">print</a></span><span class="op">(</span><span class="va">bakerrr_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Bootstrap Mean: 0.07097443 </span></span>
-<span><span class="co">#&gt; Bootstrap SD:   0.1056289 </span></span>
-<span><span class="co">#&gt; Elapsed Time:   6.457654 seconds</span></span></code></pre></div>
+<span><span class="co">#&gt; Bootstrap Mean: 0.06943009 </span></span>
+<span><span class="co">#&gt; Bootstrap SD:   0.1041822 </span></span>
+<span><span class="co">#&gt; Elapsed Time:   6.479844 seconds</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
