@@ -19,4 +19,17 @@ template:
     code_font: {google: "JetBrains Mono"}
 deploy:
   install_metadata: true
+navbar:
+ components:
+   articles:
+    text: Articles
+    menu:
+    - text: Bake Parallel Jobs in Background with bakerrr
+      href: articles/simple_example.html
+    - text: Logging to File
+      href: articles/log_file.html
+    - text: bakerrr & mirai
+      href: articles/vs_mirai.html
+    - text: Diverse Functions
+      href: articles/multi_function.html
 url: https://github.com/anirbanshaw24/bakerrr
